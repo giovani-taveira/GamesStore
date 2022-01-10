@@ -18,6 +18,7 @@ builder.Services
 builder.Services.AddAutoMapper(typeof(GameMapper));
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IPromocaoRepository, PromocaoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

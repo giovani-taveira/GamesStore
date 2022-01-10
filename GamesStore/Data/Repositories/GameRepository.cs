@@ -56,7 +56,7 @@ namespace GamesStore.Data.Repositories
 
         public Game GetById(int id)
         {
-            return context.Games.Single(c => c.GameId == id);
+            return context.Games.SingleOrDefault(c => c.GameId == id);
         }
     }
 }

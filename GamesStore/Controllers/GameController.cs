@@ -25,51 +25,51 @@ namespace GamesStore.Controllers
             var games = repository.GetAll();
 
             if(games.Count() == 0)
-                return NotFound("Não há jogos para serem exibidos");
+                return NotFound();
 
             return Ok(games);
         }
 
-        [HttpGet("{nome}")]
+        [HttpGet("GetByName/{nome}")]
         public IActionResult GetByName(string nome)
         {
             var gameByName = repository.GetByName(nome);
 
-            if (gameByName == null)
-                return NotFound("Não foi encontrado nenhum jogo");
+            if (gameByName.Count() == 0)
+                return NotFound();
 
             return Ok(gameByName);
         }
 
-        [HttpGet("{genero}")]
+        [HttpGet("GetByGender/{genero}")]
         public IActionResult GetByGender(string genero)
         {
             var gameByGender = repository.GetByGender(genero);
 
-            if(gameByGender == null)
-                return NotFound("Não foi encontrado nenhum jogo");
+            if(gameByGender.Count() == 0)
+                return NotFound();
 
             return Ok(gameByGender);
         }
 
-        [HttpGet("{dataLancamento}")]
+        [HttpGet("GetByReleaseDate/{dataLancamento}")]
         public IActionResult GetByReleaseDate(DateTime dataDeLancamento)
         {
             var gameByReleaseDate = repository.GetByReleaseDate(dataDeLancamento);
 
-            if (gameByReleaseDate == null)
-                return NotFound("Não foi encontrado nenhum jogo");
+            if (gameByReleaseDate.Count() == 0)
+                return NotFound();
 
             return Ok(gameByReleaseDate);
         }
 
-        [HttpGet("{preco}")]
+        [HttpGet("GetByPrice/{preco}")]
         public IActionResult GetByPrice(decimal preco)
         {
             var gameByPrice = repository.GetByPrice(preco);
 
-            if (gameByPrice == null)
-                return NotFound("Não foi encontrado nenhum jogo");
+            if (gameByPrice.Count() == 0)
+                return NotFound();
 
             return Ok(gameByPrice);
         }
@@ -77,7 +77,8 @@ namespace GamesStore.Controllers
         [HttpPost]
         public IActionResult AddNewGame(AddGameInputModel model)
         {
-            var game = mapper.Map<Game>(model); 
+            var game = mapper.Map<Game>(model);
+            game.CreatedAt = DateTime.Now;
             
             repository.AddGame(game);
 

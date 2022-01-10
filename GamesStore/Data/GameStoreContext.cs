@@ -10,5 +10,6 @@ namespace GamesStore.Data
             : base(option) { }
 
         public DbSet<Game> Games { get; set; }
+        public DbSet<Promocao> Promocao { get; set;}
     }
 }

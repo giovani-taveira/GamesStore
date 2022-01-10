@@ -9,6 +9,7 @@ namespace GamesStore.Mappers
         public GameMapper()
         {
             CreateMap<AddGameInputModel, Game>();
+            CreateMap<AddPromocaoInputModel, Promocao>();
         }
     }
 }
