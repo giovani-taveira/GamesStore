@@ -11,11 +11,13 @@ namespace GamesStore.Controllers
     public class GameController : ControllerBase
     {
         private readonly IGameRepository repository;
+        private readonly IUsuarioRepository usuarioRepository;
         private readonly IMapper mapper;
 
-        public GameController(IGameRepository repository, IMapper mapper)
+        public GameController(IGameRepository repository, IUsuarioRepository usuarioRepository, IMapper mapper)
         {
             this.repository = repository;
+            this.usuarioRepository = usuarioRepository;
             this.mapper = mapper;
         }
 
@@ -74,15 +76,19 @@ namespace GamesStore.Controllers
             return Ok(gameByPrice);
         }
 
-        [HttpPost]
-        public IActionResult AddNewGame(AddGameInputModel model)
+        [HttpPost("{id}")]
+        public IActionResult AddNewGame(int id, AddGameInputModel model)
         {
+            var nameExists = repository.GetByName(model.nome);
+
+            if (nameExists.Count() != 0)
+                return BadRequest("Ja existe um jogo com este nome!");
+
             var game = mapper.Map<Game>(model);
-            game.CreatedAt = DateTime.Now;
-            
+            game.UsuarioId = id;
             repository.AddGame(game);
 
-            return CreatedAtAction("Game ID", new { id = game.GameId }, game);
+            return CreatedAtAction("Game ID", new { GameId = game.GameId }, game);
         }
 
         [HttpPut]

@@ -13,13 +13,10 @@ namespace GamesStore.Entities
         //    DataFinalDaPromocao = DateTime.Now.AddDays(dias);
         //}
 
-
-        [Key]
         public int PromocaoId { get; set; }
         public int GameId { get; set; }
         public decimal PrecoPromocional { get; set; }
         public DateTime DataInicialDaPromocao { get; set; } 
         public DateTime DataFinalDaPromocao { get; set; } 
-
     }
 }

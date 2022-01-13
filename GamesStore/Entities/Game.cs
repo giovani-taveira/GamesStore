@@ -2,6 +2,12 @@
 {
     public class Game
     {
+        public Game()
+        {
+            CreatedAt = DateTime.Now;
+                
+        }
+
         public int GameId { get; private set; }
         public string Nome { get; private set; }
         public DateTime DataDeLancamento { get; private set; }
@@ -14,13 +20,7 @@
         public string  Plataforma { get; private set; }
         public int ClassificacaoEtaria { get; private set; }
         public bool EstaEmPromocao { get; set; }
-
-
-
-        //public Game(string genero)
-        //{
-        //    Genero = genero;
-        //}
+        public int UsuarioId { get; set; }
 
         public void Update(
             string nome,
@@ -35,7 +35,6 @@
             Descricao = descricao;
             Publisher = publisher;
             Plataforma = plataforma;
-
         }
     }
 }
