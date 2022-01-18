@@ -8,9 +8,12 @@ namespace GamesStore.Mappers
     {
         public GameMapper()
         {
-            CreateMap<AddGameInputModel, Game>();
+            CreateMap<AddGameInputModel, Games>();
             CreateMap<AddPromocaoInputModel, Promocao>();
-            //CreateMap<AddUsuarioInputModel, Usuario>();
+            CreateMap<AddUsuarioInputModel, Usuario>()
+                .ForMember(gm => gm.DataDeNascimento, option => option.MapFrom(p => p.dataDeNascimento.ToString()));
+            CreateMap<AddCarrinhoInputModel, Carrinho>();
+            CreateMap<AddReviewInputModel, Review>();
         }
     }
 }

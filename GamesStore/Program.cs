@@ -1,5 +1,6 @@
 using GamesStore.Data;
 using GamesStore.Data.Repositories;
+using GamesStore.Data.Repositories.Game;
 using GamesStore.Mappers;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,8 @@ builder.Services.AddAutoMapper(typeof(GameMapper));
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IPromocaoRepository, PromocaoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IBibliotecasRepository, BibliotecasRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

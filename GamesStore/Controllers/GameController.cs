@@ -11,13 +11,11 @@ namespace GamesStore.Controllers
     public class GameController : ControllerBase
     {
         private readonly IGameRepository repository;
-        private readonly IUsuarioRepository usuarioRepository;
         private readonly IMapper mapper;
 
-        public GameController(IGameRepository repository, IUsuarioRepository usuarioRepository, IMapper mapper)
+        public GameController(IGameRepository repository, IMapper mapper)
         {
             this.repository = repository;
-            this.usuarioRepository = usuarioRepository;
             this.mapper = mapper;
         }
 
@@ -27,6 +25,17 @@ namespace GamesStore.Controllers
             var games = repository.GetAll();
 
             if(games.Count() == 0)
+                return NotFound();
+
+            return Ok(games);
+        }
+
+        [HttpGet("GetById/{id}")]
+        public IActionResult GetAll(int id)
+        {
+            var games = repository.GetById(id);
+
+            if (games == null)
                 return NotFound();
 
             return Ok(games);
@@ -84,7 +93,7 @@ namespace GamesStore.Controllers
             if (nameExists.Count() != 0)
                 return BadRequest("Ja existe um jogo com este nome!");
 
-            var game = mapper.Map<Game>(model);
+            var game = mapper.Map<Games>(model);
             game.UsuarioId = id;
             repository.AddGame(game);
 
@@ -92,9 +101,12 @@ namespace GamesStore.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateGame(int id, UpdateGameInputModel model)
+        public IActionResult UpdateGame(int gameId,int userId, UpdateGameInputModel model)
         {
-            var game = repository.GetById(id);
+            var game = repository.GetById(gameId);
+
+            if (game.UsuarioId != userId)
+                return NotFound("Este usuário não possui nenhum jogo com este ID");
 
             if (game == null)
                 return NotFound();
@@ -106,9 +118,12 @@ namespace GamesStore.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteGame(int id)
+        public IActionResult DeleteGame(int gameId, int userId)
         {
-            var game = repository.GetById(id);
+            var game = repository.GetById(gameId);
+
+            if (game.UsuarioId != userId)
+                return NotFound("Este usuário não possui nenhum jogo com este ID");
 
             if (game == null)
                 return NotFound();

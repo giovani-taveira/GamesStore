@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GamesStore.Data
 {
-    public class GameValidation : IEntityTypeConfiguration<Game>
+    public class GameValidation : IEntityTypeConfiguration<Games>
     {
-        public void Configure(EntityTypeBuilder<Game> builder)
+        public void Configure(EntityTypeBuilder<Games> builder)
         {
             builder.Property(p => p.GameId).IsRequired();
             builder.Property(p => p.Nome).IsRequired().HasMaxLength(100);

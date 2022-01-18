@@ -4,6 +4,7 @@ using GamesStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesStore.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    partial class GameStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220116171215_Review")]
+    partial class Review
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,6 +148,9 @@ namespace GamesStore.Migrations
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GamesGameId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TagUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,7 +164,7 @@ namespace GamesStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
+                    b.HasIndex("GamesGameId");
 
                     b.ToTable("Reviews");
                 });
@@ -227,9 +232,7 @@ namespace GamesStore.Migrations
                 {
                     b.HasOne("GamesStore.Entities.Games", null)
                         .WithMany("Reviews")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GamesGameId");
                 });
 
             modelBuilder.Entity("GamesStore.Entities.Carrinho", b =>

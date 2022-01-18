@@ -1,4 +1,5 @@
 ﻿using GamesStore.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamesStore.Data.Repositories
 {
@@ -11,52 +12,54 @@ namespace GamesStore.Data.Repositories
             this.context = context;
         }
 
-        public void AddGame(Game game)
+        public void AddGame(Games game)
         {
             context.Games.Add(game);
             context.SaveChanges();
         }
 
-        public void DeleteGame(Game game)
+        public void DeleteGame(Games game)
         {
             context.Games.Remove(game);
             context.SaveChanges();
         }
 
-        public void UpdateGame(Game game)
+        public void UpdateGame(Games game)
         {
             context.Games.Update(game);
             context.SaveChanges();
         }
 
-        public IEnumerable<Game> GetAll()
+        public IEnumerable<Games> GetAll()
         {
             return context.Games.ToList();
         }
 
-        public IEnumerable<Game> GetByGender(string genero)
+        public IEnumerable<Games> GetByGender(string genero)
         {
             return context.Games.Where(c => c.Genero == genero).ToList();
         }
 
-        public IEnumerable<Game> GetByName(string nome)
+        public IEnumerable<Games> GetByName(string nome)
         {
             return context.Games.Where(c => c.Nome == nome).ToList();
         }
 
-        public IEnumerable<Game> GetByPrice(decimal preco)
+        public IEnumerable<Games> GetByPrice(decimal preco)
         {
             return context.Games.Where(c => c.Preco == preco).ToList();
         }
 
-        public IEnumerable<Game> GetByReleaseDate(DateTime dataLancamento)
+        public IEnumerable<Games> GetByReleaseDate(DateTime dataLancamento)
         {
             return context.Games.Where(c => c.DataDeLancamento == dataLancamento).ToList();
         }
 
-        public Game GetById(int id)
+        public Games GetById(int id)
         {
-            return context.Games.SingleOrDefault(c => c.GameId == id);
+            var review =  context.Games.Include(review => review.Reviews).SingleOrDefault(c => c.GameId == id);
+
+            return review;
         }
     }
 }

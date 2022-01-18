@@ -11,14 +11,14 @@ namespace GamesStore.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioRepository repository;
-        private readonly IGameRepository gameRepository;
-        //private readonly IMapper mapper;
+        private readonly IBibliotecasRepository bibliotecasRepository;
+        private readonly IMapper mapper;
 
-        public UsuarioController(IUsuarioRepository repository, IGameRepository gameRepository /*IMapper mapper*/)
+        public UsuarioController(IUsuarioRepository repository,IBibliotecasRepository bibliotecasRepository, IMapper mapper)
         {
             this.repository = repository;
-            this.gameRepository = gameRepository;
-            //this.mapper = mapper;
+            this.bibliotecasRepository = bibliotecasRepository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -59,12 +59,12 @@ namespace GamesStore.Controllers
         [HttpPost]
         public IActionResult AddNewUser(AddUsuarioInputModel model)
         {
-            //var user = mapper.Map<Usuario>(model);
-            var user = new Usuario(model.nome, model.nickName, model.email, model.senha);
+            var user = mapper.Map<Usuario>(model);
+
 
             var emailExisits = repository.GetUsuarioByEmail(user.Email);
             var nickNameExists = repository.GetUsuarioByNickName(user.NickName);
-            user.DataDeNascimento = DateTime.ParseExact(model.dataDeNascimento, "dd/MM/yyyy", null);
+            
             if (emailExisits != null )
                 return BadRequest("Este usuario ja está cadastrado!");
             if (nickNameExists != null)

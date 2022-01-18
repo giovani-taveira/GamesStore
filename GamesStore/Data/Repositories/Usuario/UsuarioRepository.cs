@@ -1,4 +1,5 @@
 ﻿using GamesStore.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamesStore.Data.Repositories
 {
@@ -23,7 +24,7 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<Game> GetGames(int id)
+        public IEnumerable<Games> GetGames(int id)
         {
             return context.Games.Where(g => g.UsuarioId == id).ToList();
         }
@@ -31,11 +32,11 @@ namespace GamesStore.Data.Repositories
         public IEnumerable<Usuario> GetAll()
         {
             return context.Usuarios.ToList();
-        }
+        } 
 
         public Usuario GetUserById(int id)
         {
-            return context.Usuarios.SingleOrDefault(u => u.UsuarioId == id);
+            return context.Usuarios.Include(c => c.Games).SingleOrDefault(u => u.UsuarioId == id);
         }
 
         public void UpdateUsuario(Usuario usuario)
@@ -54,7 +55,7 @@ namespace GamesStore.Data.Repositories
             return context.Usuarios.SingleOrDefault(u => u.NickName == nickName);
         }
 
-        public void AddGames(Game game)
+        public void AddGames(Games game)
         {
             context.Games.Add(game);
             context.SaveChanges();

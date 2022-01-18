@@ -16,15 +16,30 @@ namespace GamesStore.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Game>()
+            modelBuilder.Entity<Games>()
                 .HasKey(e => e.GameId);
-
 
             modelBuilder.Entity<Promocao>()
                 .HasKey(e => e.PromocaoId);
 
             modelBuilder.Entity<Usuario>()
                 .HasKey(e => e.UsuarioId);
+
+            modelBuilder.Entity<Carrinho>()
+                .HasKey(e => e.Id);
+
+            modelBuilder.Entity<Review>()
+                .HasKey(e => e.Id);
+
+            modelBuilder.Entity<Games>()
+                .HasMany(c => c.Reviews)
+                .WithOne()
+                .HasForeignKey(c => c.GameId);
+
+            modelBuilder.Entity<Usuario>()
+                .HasOne(c => c.Carrinho)
+                .WithOne(c => c.Usuario)
+                .HasForeignKey<Carrinho>(c => c.UsuarioId);
 
             modelBuilder.Entity<Usuario>()
                 .HasMany(e => e.Games)
@@ -33,8 +48,10 @@ namespace GamesStore.Data
 
         }
 
-        public DbSet<Game> Games { get; set; }
+        public DbSet<Games> Games { get; set; }
         public DbSet<Promocao> Promocao { get; set;}
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Carrinho> Carrinhos { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

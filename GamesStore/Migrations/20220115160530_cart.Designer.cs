@@ -4,6 +4,7 @@ using GamesStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesStore.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    partial class GameStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220115160530_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +43,7 @@ namespace GamesStore.Migrations
                     b.ToTable("Carrinhos");
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.Games", b =>
+            modelBuilder.Entity("GamesStore.Entities.Game", b =>
                 {
                     b.Property<int>("GameId")
                         .ValueGeneratedOnAdd()
@@ -128,42 +130,6 @@ namespace GamesStore.Migrations
                     b.ToTable("Promocao");
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Descrição")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Estrelas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TagUsuario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("Reviews");
-                });
-
             modelBuilder.Entity("GamesStore.Entities.Usuario", b =>
                 {
                     b.Property<int>("UsuarioId")
@@ -210,7 +176,7 @@ namespace GamesStore.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.Games", b =>
+            modelBuilder.Entity("GamesStore.Entities.Game", b =>
                 {
                     b.HasOne("GamesStore.Entities.Carrinho", null)
                         .WithMany("Games")
@@ -223,23 +189,9 @@ namespace GamesStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.Review", b =>
-                {
-                    b.HasOne("GamesStore.Entities.Games", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GamesStore.Entities.Carrinho", b =>
                 {
                     b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("GamesStore.Entities.Games", b =>
-                {
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("GamesStore.Entities.Usuario", b =>

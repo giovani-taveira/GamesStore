@@ -7,10 +7,10 @@ namespace GamesStore.Data.Repositories
         void AddUsuario(Usuario usuario);
         void UpdateUsuario(Usuario usuario);
         void DeleteUsuario(Usuario usuario);
-        void AddGames(Game game);
+        void AddGames(Games game);
         IEnumerable<Usuario> GetAll();
         Usuario GetUserById(int id);
-        IEnumerable<Game> GetGames(int id);
+        IEnumerable<Games> GetGames(int id);
         Usuario GetUsuarioByEmail(string email);
         Usuario GetUsuarioByNickName(string nickName);
 
