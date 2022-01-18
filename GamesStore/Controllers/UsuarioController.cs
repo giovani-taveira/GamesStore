@@ -61,7 +61,6 @@ namespace GamesStore.Controllers
         {
             var user = mapper.Map<Usuario>(model);
 
-
             var emailExisits = repository.GetUsuarioByEmail(user.Email);
             var nickNameExists = repository.GetUsuarioByNickName(user.NickName);
             
@@ -71,6 +70,11 @@ namespace GamesStore.Controllers
                 return BadRequest("Este NickName ja existe!");
 
             repository.AddUsuario(user);
+
+            var cart = new Carrinho();
+            cart.UsuarioId = user.UsuarioId;
+            bibliotecasRepository.CreateCart(cart);
+
 
             return CreatedAtAction("User", new { userId = user.UsuarioId }, user);
         }

@@ -12,12 +12,14 @@ namespace GamesStore.Controllers
     {
         private readonly IBibliotecasRepository repository;
         private readonly IGameRepository gameRepository;
+        private readonly IUsuarioRepository usuarioRepository;
         private readonly IMapper mapper;
 
-        public BibliotecaController(IBibliotecasRepository repository, IGameRepository gameRepository, IMapper mapper)
+        public BibliotecaController(IBibliotecasRepository repository, IGameRepository gameRepository,IUsuarioRepository usuarioRepository, IMapper mapper)
         {
             this.repository = repository;
             this.gameRepository = gameRepository;
+            this.usuarioRepository = usuarioRepository;
             this.mapper = mapper;
         }
 
@@ -40,13 +42,18 @@ namespace GamesStore.Controllers
             return Ok();
         }
 
-        [HttpPost()]
-        public IActionResult CreateCart(int id, AddCarrinhoInputModel model)
-        {
+        //[HttpPost]
+        //public IActionResult CreateCart(int id, AddCarrinhoInputModel model)
+        //{
+        //    var user = usuarioRepository.GetUserById(id);
+        //    if (user == null)
+        //        return NotFound();
+            
+        //    var cart = mapper.Map<Carrinho>(model);
+        //    cart.UsuarioId = id;
 
-            var cart = mapper.Map<Carrinho>(model);
-            repository.CreateCart(cart);
-            return Ok();
-        }
+        //    repository.CreateCart(cart);
+        //    return Ok(cart);
+        //}
     }
 }

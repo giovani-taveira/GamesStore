@@ -38,7 +38,7 @@ namespace GamesStore.Data
 
             modelBuilder.Entity<Usuario>()
                 .HasOne(c => c.Carrinho)
-                .WithOne(c => c.Usuario)
+                .WithOne()
                 .HasForeignKey<Carrinho>(c => c.UsuarioId);
 
             modelBuilder.Entity<Usuario>()
