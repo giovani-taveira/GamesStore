@@ -7,6 +7,7 @@ namespace GamesStore.Entities
         protected Usuario()
         {
             Games = new List<Games>();
+            CreatedAt = DateTime.Now;
         }
 
         public Usuario(string nome, string nickName, string email, string senha, string dataNascimento)
@@ -16,9 +17,7 @@ namespace GamesStore.Entities
             Email = email;
             Senha = senha;
 
-            DataDeNascimento = DateTime.ParseExact(dataNascimento, "dd/MM/yyy", null);
-            CreatedAt = DateTime.Now;
-            
+            DataDeNascimento = DateTime.ParseExact(dataNascimento, "dd/MM/yyy", null);                      
         }
 
         public int UsuarioId { get;  private set; }
@@ -29,7 +28,9 @@ namespace GamesStore.Entities
         public DateTime DataDeNascimento { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public List<Games> Games { get; private set; }
-        public Carrinho Carrinho { get; set; }
+        public Carrinho Carrinho { get; private set; }
+        public ListaDeDesejos ListaDeDesejos { get; private set; }
+        public Biblioteca Biblioteca { get; private set; }
 
         public void Update(string nome, string nickName, string senha)
         {

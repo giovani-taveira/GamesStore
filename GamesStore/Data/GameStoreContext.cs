@@ -15,7 +15,7 @@ namespace GamesStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            #region Primary Keys
             modelBuilder.Entity<Games>()
                 .HasKey(e => e.GameId);
 
@@ -28,9 +28,19 @@ namespace GamesStore.Data
             modelBuilder.Entity<Carrinho>()
                 .HasKey(e => e.Id);
 
+            modelBuilder.Entity<ListaDeDesejos>()
+                .HasKey(e => e.Id);
+
+            modelBuilder.Entity<Biblioteca>()
+                .HasKey(e => e.Id);
+
             modelBuilder.Entity<Review>()
                 .HasKey(e => e.Id);
 
+            #endregion
+
+
+            #region Froreign Keys
             modelBuilder.Entity<Games>()
                 .HasMany(c => c.Reviews)
                 .WithOne()
@@ -42,9 +52,20 @@ namespace GamesStore.Data
                 .HasForeignKey<Carrinho>(c => c.UsuarioId);
 
             modelBuilder.Entity<Usuario>()
+                .HasOne(c => c.ListaDeDesejos)
+                .WithOne()
+                .HasForeignKey<ListaDeDesejos>(c => c.UsuarioId);
+
+            modelBuilder.Entity<Usuario>()
+                .HasOne(c => c.Biblioteca)
+                .WithOne()
+                .HasForeignKey<Biblioteca>(c => c.UsuarioId);
+
+            modelBuilder.Entity<Usuario>()
                 .HasMany(e => e.Games)
                 .WithOne()
                 .HasForeignKey(e => e.UsuarioId);
+            #endregion
 
         }
 
@@ -53,5 +74,8 @@ namespace GamesStore.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Carrinho> Carrinhos { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<ListaDeDesejos> ListaDeDesejos { get; set; }
+        public DbSet<Biblioteca> Bibliotecas { get; set; }
+
     }
 }

@@ -75,6 +75,14 @@ namespace GamesStore.Controllers
             cart.UsuarioId = user.UsuarioId;
             bibliotecasRepository.CreateCart(cart);
 
+            var wishList = new ListaDeDesejos();
+            wishList.UsuarioId = user.UsuarioId;
+            bibliotecasRepository.CreateWishList(wishList);
+
+            var library = new Biblioteca();
+            library.UsuarioId = user.UsuarioId;
+            bibliotecasRepository.CreateLibrary(library);
+
 
             return CreatedAtAction("User", new { userId = user.UsuarioId }, user);
         }

@@ -5,28 +5,31 @@ namespace GamesStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BibliotecaController : ControllerBase
+    public class ListaDeDesejosController : ControllerBase
     {
         private readonly IBibliotecasRepository repository;
         private readonly IGameRepository gameRepository;
 
-        public BibliotecaController(IBibliotecasRepository repository, IGameRepository gameRepository)
+        public ListaDeDesejosController(IBibliotecasRepository repository, IGameRepository gameRepository)
         {
             this.repository = repository;
             this.gameRepository = gameRepository;
         }
 
         [HttpGet]
-        public IActionResult GetGamesFromLibrary(int userId)
+        public IActionResult GetGamesFromCart(int userId)
         {
-            var cart = repository.GamesFromLibrary(userId);
+            var cart = repository.GamesFromWishList(userId);
             return Ok(cart);
         }
 
-        [HttpPost("AdicionarABiblioteca/{userId}")]
-        public IActionResult AddGameOnLibrary(int userId, int gameId)
+        [HttpPost("AdicionarNaListaDeDesejos/{userId}")]
+        public IActionResult AddGameOnCart(int userId, int gameId)
         {
-            var gameExists = repository.GamesFromLibrary(userId);
+            var gameExists = repository.GamesFromWishList(userId);
+            if (gameExists == null)
+                return NotFound();
+;
             if (gameExists.Games.Count() != 0)
                 return BadRequest("Este jogo já está no carrinho");
 
@@ -34,14 +37,14 @@ namespace GamesStore.Controllers
             if (game == null)
                 return NotFound();
 
-            repository.AddGameToLibrary(userId, game);
+            repository.AddGameToWishList(userId, game);
             return Ok();
         }
 
-        [HttpDelete("RemoverJogoDoaBiblioteca{gameId}")]
+        [HttpDelete("RemoverDaListaDeDesejos/{gameId}")]
         public IActionResult RemoveGame(int userId, int gameId)
         {
-            repository.RemoveGameFromLibrary(userId, gameId);
+            repository.RemoveGameFromWishList(userId, gameId);
             return NoContent();
         }
     }

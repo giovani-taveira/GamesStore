@@ -12,7 +12,6 @@ namespace GamesStore.Mappers
             CreateMap<AddPromocaoInputModel, Promocao>();
             CreateMap<AddUsuarioInputModel, Usuario>()
                 .ForMember(gm => gm.DataDeNascimento, option => option.MapFrom(p => p.dataDeNascimento.ToString()));
-            CreateMap<AddCarrinhoInputModel, Carrinho>();
             CreateMap<AddReviewInputModel, Review>();
         }
     }

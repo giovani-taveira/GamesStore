@@ -4,6 +4,7 @@ using GamesStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesStore.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    partial class GameStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220124231417_Wish List")]
+    partial class WishList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,25 +23,6 @@ namespace GamesStore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("GamesStore.Entities.Biblioteca", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
-
-                    b.ToTable("Bibliotecas");
-                });
 
             modelBuilder.Entity("GamesStore.Entities.Carrinho", b =>
                 {
@@ -67,9 +50,6 @@ namespace GamesStore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"), 1L, 1);
-
-                    b.Property<int?>("BibliotecaId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("CarrinhoId")
                         .HasColumnType("int");
@@ -121,8 +101,6 @@ namespace GamesStore.Migrations
 
                     b.HasKey("GameId");
 
-                    b.HasIndex("BibliotecaId");
-
                     b.HasIndex("CarrinhoId");
 
                     b.HasIndex("ListaDeDesejosId");
@@ -144,9 +122,6 @@ namespace GamesStore.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
 
                     b.ToTable("ListaDeDesejos");
                 });
@@ -247,15 +222,6 @@ namespace GamesStore.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.Biblioteca", b =>
-                {
-                    b.HasOne("GamesStore.Entities.Usuario", null)
-                        .WithOne("Biblioteca")
-                        .HasForeignKey("GamesStore.Entities.Biblioteca", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GamesStore.Entities.Carrinho", b =>
                 {
                     b.HasOne("GamesStore.Entities.Usuario", null)
@@ -267,10 +233,6 @@ namespace GamesStore.Migrations
 
             modelBuilder.Entity("GamesStore.Entities.Games", b =>
                 {
-                    b.HasOne("GamesStore.Entities.Biblioteca", null)
-                        .WithMany("Games")
-                        .HasForeignKey("BibliotecaId");
-
                     b.HasOne("GamesStore.Entities.Carrinho", null)
                         .WithMany("Games")
                         .HasForeignKey("CarrinhoId");
@@ -286,15 +248,6 @@ namespace GamesStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamesStore.Entities.ListaDeDesejos", b =>
-                {
-                    b.HasOne("GamesStore.Entities.Usuario", null)
-                        .WithOne("ListaDeDesejos")
-                        .HasForeignKey("GamesStore.Entities.ListaDeDesejos", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GamesStore.Entities.Review", b =>
                 {
                     b.HasOne("GamesStore.Entities.Games", null)
@@ -302,11 +255,6 @@ namespace GamesStore.Migrations
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GamesStore.Entities.Biblioteca", b =>
-                {
-                    b.Navigation("Games");
                 });
 
             modelBuilder.Entity("GamesStore.Entities.Carrinho", b =>
@@ -326,16 +274,10 @@ namespace GamesStore.Migrations
 
             modelBuilder.Entity("GamesStore.Entities.Usuario", b =>
                 {
-                    b.Navigation("Biblioteca")
-                        .IsRequired();
-
                     b.Navigation("Carrinho")
                         .IsRequired();
 
                     b.Navigation("Games");
-
-                    b.Navigation("ListaDeDesejos")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
