@@ -9,15 +9,15 @@ namespace GamesStore.Data
         public void Configure(EntityTypeBuilder<Games> builder)
         {
             builder.Property(p => p.GameId).IsRequired();
-            builder.Property(p => p.Nome).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Preco).IsRequired();
-            builder.Property(p => p.Genero).IsRequired();
-            builder.Property(p => p.Descricao).IsRequired();
-            builder.Property(p => p.DataDeLancamento).IsRequired();
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Price).IsRequired();
+            builder.Property(p => p.Gender).IsRequired();
+            builder.Property(p => p.Description).IsRequired();
+            builder.Property(p => p.ReleaseDate).IsRequired();
             builder.Property(p => p.Publisher).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Desenvolvedora).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Plataforma).IsRequired();
-            builder.Property(p => p.ClassificacaoEtaria).IsRequired();
+            builder.Property(p => p.Developer).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Platform).IsRequired();
+            builder.Property(p => p.AgeRating).IsRequired();
         }
     }
 }

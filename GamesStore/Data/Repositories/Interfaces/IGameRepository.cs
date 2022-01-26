@@ -6,13 +6,12 @@ namespace GamesStore.Data.Repositories
     {
         IEnumerable<Games> GetAll();
         Games GetById(int id);
-        IEnumerable<Games> GetByName(string nome);
-        IEnumerable<Games> GetByGender(string genero);
-        IEnumerable<Games> GetByReleaseDate(DateTime dataLancamento);
-        IEnumerable<Games> GetByPrice(decimal preco);
+        IEnumerable<Games> GetByName(string name);
+        IEnumerable<Games> GetByGender(string gender);
+        IEnumerable<Games> GetByReleaseDate(DateTime releaseDate);
+        IEnumerable<Games> GetByPrice(decimal price);
         void AddGame(Games game);
         void DeleteGame(Games game);
         void UpdateGame(Games game);
-        //void AddComment
     }
 }

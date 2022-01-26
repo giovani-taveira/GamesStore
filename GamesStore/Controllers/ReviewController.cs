@@ -12,18 +12,16 @@ namespace GamesStore.Controllers
     {
         private readonly IReviewRepository repository;
         private readonly IGameRepository gameRepository;
-        private readonly IUsuarioRepository usuarioRepository;
-        private readonly IMapper mapper;
+        private readonly IUserRepository userRepository;
 
-        public ReviewController(IReviewRepository repository,IGameRepository gameRepository,IUsuarioRepository usuarioRepository, IMapper mapper)
+        public ReviewController(IReviewRepository repository,IGameRepository gameRepository,IUserRepository userRepository)
         {
             this.repository = repository;
             this.gameRepository = gameRepository;
-            this.usuarioRepository = usuarioRepository;
-            this.mapper = mapper;
+            this.userRepository = userRepository;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetReview(int id)
         {
             var reviews = repository.GetReviews(id);
@@ -33,50 +31,39 @@ namespace GamesStore.Controllers
             return Ok(reviews);
         }
 
-        [HttpPost]
-        public IActionResult PostReview(int id, int userId, AddReviewInputModel model)
+        [HttpPost("{gameId}/{userId}")]
+        public IActionResult PostReview(int gameId, int userId, AddReviewInputModel model)
         {
-            var user = usuarioRepository.GetUserById(userId);
-            var game = gameRepository.GetById(id);
-            var review = mapper.Map<Review>(model);
-
-            //var review2 = new Review(userId, id, model.tag, model.estrelas, model.titulo, model.descricao);
-            
-            review.GameId = game.GameId;
-            review.UsuarioId = userId;
-            review.Descrição = model.descricao;
-            review.TagUsuario = user.NickName;
+            var user = userRepository.GetUserById(userId);
+            var game = gameRepository.GetById(gameId);
+            var review = new Review(userId, game.GameId, user.GamerTag, model.stars, model.title, model.description);
 
             game.Reviews.Add(review);
             repository.AddReview(review);
             
-
             return Ok(review);
-
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult PutReview(int id, UpdateReviewInputModel model)
         {
             var review = repository.GetReviews(id);
-
-            review.UpdateReview(model.titulo, model.descricao);
-
+            review.UpdateReview(model.title, model.description);
             repository.UpdateReview(review);
 
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteReview(int id)
         {
-            var review = repository.GetReviews(id);
+            if (repository.GetReviews(id) == null)
+                return NotFound();
 
+            var review = repository.GetReviews(id);
             repository.DeleteReview(review);
 
             return NoContent();
-
         }
-
     }
 }

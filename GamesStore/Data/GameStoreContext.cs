@@ -19,19 +19,19 @@ namespace GamesStore.Data
             modelBuilder.Entity<Games>()
                 .HasKey(e => e.GameId);
 
-            modelBuilder.Entity<Promocao>()
-                .HasKey(e => e.PromocaoId);
+            modelBuilder.Entity<Sale>()
+                .HasKey(e => e.SaleId);
 
-            modelBuilder.Entity<Usuario>()
-                .HasKey(e => e.UsuarioId);
+            modelBuilder.Entity<User>()
+                .HasKey(e => e.UserId);
 
-            modelBuilder.Entity<Carrinho>()
+            modelBuilder.Entity<Cart>()
                 .HasKey(e => e.Id);
 
-            modelBuilder.Entity<ListaDeDesejos>()
+            modelBuilder.Entity<WishList>()
                 .HasKey(e => e.Id);
 
-            modelBuilder.Entity<Biblioteca>()
+            modelBuilder.Entity<Library>()
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Review>()
@@ -44,38 +44,41 @@ namespace GamesStore.Data
             modelBuilder.Entity<Games>()
                 .HasMany(c => c.Reviews)
                 .WithOne()
-                .HasForeignKey(c => c.GameId);
+                .HasForeignKey(c => c.GameId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Usuario>()
-                .HasOne(c => c.Carrinho)
+            modelBuilder.Entity<User>()
+                .HasOne(c => c.Cart)
                 .WithOne()
-                .HasForeignKey<Carrinho>(c => c.UsuarioId);
+                .HasForeignKey<Cart>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Usuario>()
-                .HasOne(c => c.ListaDeDesejos)
+            modelBuilder.Entity<User>()
+                .HasOne(c => c.WishList)
                 .WithOne()
-                .HasForeignKey<ListaDeDesejos>(c => c.UsuarioId);
+                .HasForeignKey<WishList>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Usuario>()
-                .HasOne(c => c.Biblioteca)
+            modelBuilder.Entity<User>()
+                .HasOne(c => c.Library)
                 .WithOne()
-                .HasForeignKey<Biblioteca>(c => c.UsuarioId);
+                .HasForeignKey<Library>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Usuario>()
+            modelBuilder.Entity<User>()
                 .HasMany(e => e.Games)
                 .WithOne()
-                .HasForeignKey(e => e.UsuarioId);
+                .HasForeignKey(e => e.UserId);
             #endregion
 
         }
 
         public DbSet<Games> Games { get; set; }
-        public DbSet<Promocao> Promocao { get; set;}
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Carrinho> Carrinhos { get; set; }
+        public DbSet<Sale> Sales { get; set;}
+        public DbSet<User> Users { get; set; }
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<ListaDeDesejos> ListaDeDesejos { get; set; }
-        public DbSet<Biblioteca> Bibliotecas { get; set; }
-
+        public DbSet<WishList> WishLists { get; set; }
+        public DbSet<Library> Libraries { get; set; }
     }
 }

@@ -8,11 +8,11 @@ namespace GamesStore.Mappers
     {
         public GameMapper()
         {
-            CreateMap<AddGameInputModel, Games>();
-            CreateMap<AddPromocaoInputModel, Promocao>();
-            CreateMap<AddUsuarioInputModel, Usuario>()
-                .ForMember(gm => gm.DataDeNascimento, option => option.MapFrom(p => p.dataDeNascimento.ToString()));
-            CreateMap<AddReviewInputModel, Review>();
+            CreateMap<AddGameInputModel, Games>()
+                .ForMember(gm => gm.ReleaseDate, option => option.MapFrom(p => p.releaseDate.ToString()));
+            CreateMap<AddUserInputModel, User>()
+                .ForMember(gm => gm.DateOfBirth, option => option.MapFrom(p => p.dayOfByrth.ToString()));
+            //CreateMap<AddReviewInputModel, Review>();
         }
     }
 }

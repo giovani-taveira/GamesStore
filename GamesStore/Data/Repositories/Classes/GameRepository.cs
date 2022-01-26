@@ -35,24 +35,24 @@ namespace GamesStore.Data.Repositories
             return context.Games.ToList();
         }
 
-        public IEnumerable<Games> GetByGender(string genero)
+        public IEnumerable<Games> GetByGender(string gender)
         {
-            return context.Games.Where(c => c.Genero == genero).ToList();
+            return context.Games.Where(c => c.Gender == gender).ToList();
         }
 
-        public IEnumerable<Games> GetByName(string nome)
+        public IEnumerable<Games> GetByName(string name)
         {
-            return context.Games.Where(c => c.Nome == nome).ToList();
+            return context.Games.Where(c => c.Name == name).ToList();
         }
 
-        public IEnumerable<Games> GetByPrice(decimal preco)
+        public IEnumerable<Games> GetByPrice(decimal price)
         {
-            return context.Games.Where(c => c.Preco == preco).ToList();
+            return context.Games.Where(c => c.Price == price).ToList();
         }
 
-        public IEnumerable<Games> GetByReleaseDate(DateTime dataLancamento)
+        public IEnumerable<Games> GetByReleaseDate(DateTime releaseDate)
         {
-            return context.Games.Where(c => c.DataDeLancamento == dataLancamento).ToList();
+            return context.Games.Where(c => c.ReleaseDate == releaseDate).ToList();
         }
 
         public Games GetById(int id)

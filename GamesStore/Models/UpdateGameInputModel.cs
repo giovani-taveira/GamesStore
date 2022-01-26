@@ -1,11 +1,11 @@
 ﻿namespace GamesStore.Models
 {
     public record class UpdateGameInputModel(
-        string nome,
-        decimal preco,
-        string descricao,
+        string name,
+        decimal price,
+        string description,
         string publisher,
-        string plataforma
+        string platform
         )
     {
     }

@@ -3,13 +3,14 @@ using GamesStore.Data.Repositories;
 using GamesStore.Data.Repositories.Game;
 using GamesStore.Mappers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
 
 var connectionString = builder.Configuration.GetConnectionString("GamesStoreDB");
 builder.Services
@@ -19,13 +20,30 @@ builder.Services
 builder.Services.AddAutoMapper(typeof(GameMapper));
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
-builder.Services.AddScoped<IPromocaoRepository, PromocaoRepository>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IBibliotecasRepository, BibliotecasRepository>();
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILibrariesRepository, LibrariesRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "DevGames API",
+        Version = "v1",
+        Contact = new OpenApiContact
+        {
+            Name = "Giovani Taveira",
+            Email = "giovani_alvarenga_@hotmail.com",
+            Url = new Uri("https://www.linkedin.com/in/giovani-de-alvarenga-taveira-382068210/")
+        }
+    });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 

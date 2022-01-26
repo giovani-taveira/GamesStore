@@ -41,10 +41,10 @@ namespace GamesStore.Controllers
             return Ok(games);
         }
 
-        [HttpGet("GetByName/{nome}")]
-        public IActionResult GetByName(string nome)
+        [HttpGet("GetByName/{name}")]
+        public IActionResult GetByName(string name)
         {
-            var gameByName = repository.GetByName(nome);
+            var gameByName = repository.GetByName(name);
 
             if (gameByName.Count() == 0)
                 return NotFound();
@@ -52,10 +52,10 @@ namespace GamesStore.Controllers
             return Ok(gameByName);
         }
 
-        [HttpGet("GetByGender/{genero}")]
-        public IActionResult GetByGender(string genero)
+        [HttpGet("GetByGender/{gender}")]
+        public IActionResult GetByGender(string gender)
         {
-            var gameByGender = repository.GetByGender(genero);
+            var gameByGender = repository.GetByGender(gender);
 
             if(gameByGender.Count() == 0)
                 return NotFound();
@@ -63,10 +63,13 @@ namespace GamesStore.Controllers
             return Ok(gameByGender);
         }
 
-        [HttpGet("GetByReleaseDate/{dataLancamento}")]
-        public IActionResult GetByReleaseDate(DateTime dataDeLancamento)
+        /// <remarks>
+        /// ReleaseDate Format : yyyy-MM-ddT00:00:00
+        /// </remarks>
+        [HttpGet("GetByReleaseDate/{releaseDate}")]
+        public IActionResult GetByReleaseDate(DateTime releaseDate)
         {
-            var gameByReleaseDate = repository.GetByReleaseDate(dataDeLancamento);
+            var gameByReleaseDate = repository.GetByReleaseDate(releaseDate);
 
             if (gameByReleaseDate.Count() == 0)
                 return NotFound();
@@ -74,10 +77,10 @@ namespace GamesStore.Controllers
             return Ok(gameByReleaseDate);
         }
 
-        [HttpGet("GetByPrice/{preco}")]
-        public IActionResult GetByPrice(decimal preco)
+        [HttpGet("GetByPrice/{price}")]
+        public IActionResult GetByPrice(decimal price)
         {
-            var gameByPrice = repository.GetByPrice(preco);
+            var gameByPrice = repository.GetByPrice(price);
 
             if (gameByPrice.Count() == 0)
                 return NotFound();
@@ -85,44 +88,48 @@ namespace GamesStore.Controllers
             return Ok(gameByPrice);
         }
 
-        [HttpPost("{id}")]
-        public IActionResult AddNewGame(int id, AddGameInputModel model)
+
+        /// <remarks>
+        /// ReleaseDate Format : dd/MM/yyyy
+        /// </remarks>
+        [HttpPost("{userId}")]
+        public IActionResult AddNewGame(int userId, AddGameInputModel model)
         {
-            var nameExists = repository.GetByName(model.nome);
+            var nameExists = repository.GetByName(model.name);
 
             if (nameExists.Count() != 0)
                 return BadRequest("Ja existe um jogo com este nome!");
 
             var game = mapper.Map<Games>(model);
-            game.UsuarioId = id;
+            game.UserId = userId;
             repository.AddGame(game);
 
             return CreatedAtAction("Game ID", new { GameId = game.GameId }, game);
         }
 
-        [HttpPut]
+        [HttpPut("{gameId}/{userId}")]
         public IActionResult UpdateGame(int gameId,int userId, UpdateGameInputModel model)
         {
             var game = repository.GetById(gameId);
 
-            if (game.UsuarioId != userId)
+            if (game.UserId != userId)
                 return NotFound("Este usuário não possui nenhum jogo com este ID");
 
             if (game == null)
                 return NotFound();
 
-            game.Update(model.nome, model.preco, model.descricao, model.plataforma, model.publisher);
+            game.Update(model.name, model.price, model.description, model.platform, model.publisher);
             repository.UpdateGame(game);
 
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{gameId}/{userId}")]
         public IActionResult DeleteGame(int gameId, int userId)
         {
             var game = repository.GetById(gameId);
 
-            if (game.UsuarioId != userId)
+            if (game.UserId != userId)
                 return NotFound("Este usuário não possui nenhum jogo com este ID");
 
             if (game == null)
@@ -132,7 +139,5 @@ namespace GamesStore.Controllers
 
             return NoContent();
         }
-
-
     }
 }

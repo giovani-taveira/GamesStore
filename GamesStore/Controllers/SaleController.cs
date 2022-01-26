@@ -9,13 +9,13 @@ namespace GamesStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PromocaoController : ControllerBase
+    public class SaleController : ControllerBase
     {
-        private readonly IPromocaoRepository repository;
+        private readonly ISaleRepository repository;
         private readonly IGameRepository gameRepository;
         private readonly IMapper mapper;
 
-        public PromocaoController(IPromocaoRepository repository, IGameRepository gameRepository, IMapper mapper)
+        public SaleController(ISaleRepository repository, IGameRepository gameRepository, IMapper mapper)
         {
             this.repository = repository;
             this.gameRepository = gameRepository;
@@ -34,31 +34,27 @@ namespace GamesStore.Controllers
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult AddNewSale(int gameId, AddPromocaoInputModel model)
+        public IActionResult AddNewSale(int gameId, AddSaleInputModel model)
         {
-            var sale = mapper.Map<Promocao>(model);
-
-            sale.DataFinalDaPromocao = DateTime.Now.AddDays(model.Dias);
-            sale.PrecoPromocional = model.PrecoPromocao;
-            sale.GameId = gameId;
+            var sale = new Sale(gameId, model.promotionalPrice, model.days);
 
             var TemPromocaoAtiva = repository.TemPromocaoAtiva(gameId);
             var gameQuery = gameRepository.GetById(gameId);
             if (TemPromocaoAtiva)
                 return BadRequest("Este jogo ja tem um promoção ativa");
 
-            if (model.PrecoPromocao >= gameQuery.Preco)
+            if (model.promotionalPrice >= gameQuery.Price)
                 return BadRequest("O preço promocional não pode ser maior nem igual que o preço normal");
 
-            if (model.Dias > 30 || model.Dias < 7)
+            if (model.days > 30 || model.days < 7)
                 return BadRequest("A promoção não pode durar mais que 30 dias e menos que 7 dias");
 
-            //var sale = new Promocao(gameId, model.PrecoPromocao, model.Dias);
 
-            gameQuery.EstaEmPromocao = true;
+
+            gameQuery.ItIsInPromotion = true;
             repository.AddNewSale(sale);
 
-            return CreatedAtAction("Promocao ID", new { id = sale.PromocaoId }, sale);
+            return CreatedAtAction("Promocao ID", new { id = sale.SaleId}, sale);
         }
 
         [HttpDelete("{id}")]
@@ -71,7 +67,7 @@ namespace GamesStore.Controllers
 
             var promocao = repository.GetSale(id);
             var gameQuery = gameRepository.GetById(promocao.GameId);
-            gameQuery.EstaEmPromocao = false;
+            gameQuery.ItIsInPromotion = false;
 
             repository.DeleteSale(id);
             return NoContent();
@@ -83,10 +79,10 @@ namespace GamesStore.Controllers
             var promocoes = repository.GetAllGamesOnSale(); 
             foreach (var promocao in promocoes)
             {
-                if(DateTime.Now >= promocao.DataFinalDaPromocao)
+                if(DateTime.Now >= promocao.PromotionEndDate)
                 {
                     var gameQuery = gameRepository.GetById(promocao.GameId);
-                    gameQuery.EstaEmPromocao = false;
+                    gameQuery.ItIsInPromotion = false;
                     repository.DeleteSale(promocao);
                 }
             }

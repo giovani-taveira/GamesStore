@@ -8,25 +8,23 @@ namespace GamesStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUsuarioRepository repository;
-        private readonly IBibliotecasRepository bibliotecasRepository;
+        private readonly IUserRepository repository;
+        private readonly ILibrariesRepository librariesRepository;
         private readonly IMapper mapper;
 
-        public UsuarioController(IUsuarioRepository repository,IBibliotecasRepository bibliotecasRepository, IMapper mapper)
+        public UserController(IUserRepository repository,ILibrariesRepository librariesRepository, IMapper mapper)
         {
             this.repository = repository;
-            this.bibliotecasRepository = bibliotecasRepository;
+            this.librariesRepository = librariesRepository;
             this.mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetAllUsers()
         {
-
-            var users = repository.GetAll();
-            
+            var users = repository.GetAll();         
 
             if (users.Count() == 0)
                 return NotFound();
@@ -56,13 +54,16 @@ namespace GamesStore.Controllers
             return Ok(games);
         }
 
+        /// <remarks>
+        /// DayOfBirth Format : dd/MM/yyyy,
+        /// </remarks>
         [HttpPost]
-        public IActionResult AddNewUser(AddUsuarioInputModel model)
+        public IActionResult AddNewUser(AddUserInputModel model)
         {
-            var user = mapper.Map<Usuario>(model);
+            var user = mapper.Map<User>(model);
 
             var emailExisits = repository.GetUsuarioByEmail(user.Email);
-            var nickNameExists = repository.GetUsuarioByNickName(user.NickName);
+            var nickNameExists = repository.GetUsuarioByNickName(user.GamerTag);
             
             if (emailExisits != null )
                 return BadRequest("Este usuario ja está cadastrado!");
@@ -71,35 +72,27 @@ namespace GamesStore.Controllers
 
             repository.AddUsuario(user);
 
-            var cart = new Carrinho();
-            cart.UsuarioId = user.UsuarioId;
-            bibliotecasRepository.CreateCart(cart);
+            var cart = new Cart(user.UserId);     
+            librariesRepository.CreateCart(cart);
 
-            var wishList = new ListaDeDesejos();
-            wishList.UsuarioId = user.UsuarioId;
-            bibliotecasRepository.CreateWishList(wishList);
+            var wishList = new WishList(user.UserId);
+            librariesRepository.CreateWishList(wishList);
 
-            var library = new Biblioteca();
-            library.UsuarioId = user.UsuarioId;
-            bibliotecasRepository.CreateLibrary(library);
+            var library = new Library(user.UserId);
+            librariesRepository.CreateLibrary(library);
 
-
-            return CreatedAtAction("User", new { userId = user.UsuarioId }, user);
+            return CreatedAtAction("User", new { userId = user.UserId }, user);
         }
 
         [HttpPut("UpdateUser/{id}")]
-        public IActionResult UpdateUser(int id, UpdateUsuarioInputModel model)
+        public IActionResult UpdateUser(int id, UpdateUserInputModel model)
         {
             var user = repository.GetUserById(id);
-            //var nickNameExists = repository.GetUsuarioByNickName(model.nickName);
 
             if (user == null)
                 return NotFound();
 
-            //if (nickNameExists != null)
-            //    return BadRequest("Este NickName ja existe!");
-
-            user.Update(model.nome, model.nickName, model.senha);
+            user.Update(model.name, model.gamerTag, model.password);
             repository.UpdateUsuario(user);
 
             return NoContent();

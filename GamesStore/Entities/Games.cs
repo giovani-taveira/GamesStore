@@ -9,18 +9,18 @@
         }
 
         public int GameId { get; private set; }
-        public int UsuarioId { get; set; }
-        public string Nome { get; private set; }
-        public DateTime DataDeLancamento { get; private set; }
+        public int UserId { get; set; }
+        public string Name { get; private set; }
+        public DateTime ReleaseDate { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public decimal Preco { get; private set; }
-        public string Genero { get; private set; }
-        public string Descricao { get; private set; }
-        public string Desenvolvedora { get; private set; }
+        public decimal Price { get; private set; }
+        public string Gender { get; private set; }
+        public string Description { get; private set; }
+        public string Developer { get; private set; }
         public string Publisher { get; private set; }
-        public string Plataforma { get; private set; }
-        public int ClassificacaoEtaria { get; private set; }
-        public bool EstaEmPromocao { get; set; }
+        public string Platform { get; private set; }
+        public int AgeRating { get; private set; }
+        public bool ItIsInPromotion { get; set; }
         public List<Review> Reviews { get; set; }
 
 
@@ -35,11 +35,11 @@
             string plataforma
             )
         {
-            Nome = nome;
-            Preco = preco;
-            Descricao = descricao;
+            Name = nome;
+            Price = preco;
+            Description = descricao;
             Publisher = publisher;
-            Plataforma = plataforma;
+            Platform = plataforma;
         }
     }
 }
