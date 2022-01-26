@@ -73,8 +73,11 @@ namespace GamesStore.Controllers
             return NoContent();
         }
 
-        [HttpDelete()]
-        public IActionResult DeleteSale()
+        /// <remarks>
+        /// Promoçao é deletada se tiver passado da data limite de duração
+        /// </remarks>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSale()
         {
             var promocoes = repository.GetAllGamesOnSale(); 
             foreach (var promocao in promocoes)

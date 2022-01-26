@@ -17,6 +17,10 @@ builder.Services
     .AddDbContext<GameStoreContext>(o =>
     o.UseSqlServer(connectionString));
 
+//builder.Services
+//    .AddDbContext<GameStoreContext>(o =>
+//    o.UseInMemoryDatabase(connectionString));
+
 builder.Services.AddAutoMapper(typeof(GameMapper));
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
