@@ -10,7 +10,22 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Arquivos Diversos",
       "ColorIndex": -1
+    },
+    "082931db-fec4-451e-80c5-59abf094122e": {
+      "ProjectGuid": "082931db-fec4-451e-80c5-59abf094122e",
+      "DisplayName": "GamesStore.Data",
+      "ColorIndex": 1
+    },
+    "86e49014-9586-4ffa-8f60-643cc81a85a0": {
+      "ProjectGuid": "86e49014-9586-4ffa-8f60-643cc81a85a0",
+      "DisplayName": "GamesStore.Authentication",
+      "ColorIndex": 2
+    },
+    "69913221-c730-48c3-b922-e792483b2a3b": {
+      "ProjectGuid": "69913221-c730-48c3-b922-e792483b2a3b",
+      "DisplayName": "GamesStore.Application",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 4
 }

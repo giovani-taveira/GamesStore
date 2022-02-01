@@ -1,0 +1,15 @@
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\GamesStore.Authentication.deps.json
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\GamesStore.Authentication.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\ref\GamesStore.Authentication.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\GamesStore.Authentication.pdb
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\bin\Debug\net6.0\GamesStore.Data.pdb
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.csproj.AssemblyReference.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.GeneratedMSBuildEditorConfig.editorconfig
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.AssemblyInfoInputs.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.AssemblyInfo.cs
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.csproj.CoreCompileInputs.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.csproj.CopyComplete
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\ref\GamesStore.Authentication.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Authentication\obj\Debug\net6.0\GamesStore.Authentication.pdb
