@@ -15,50 +15,30 @@ namespace GamesStore.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository repository;
-        private readonly ILibrariesRepository librariesRepository;
         private readonly IUserService userService;
-        private readonly IMapper mapper;
 
-        public UserController(IUserRepository repository,ILibrariesRepository librariesRepository, IUserService userService, IMapper mapper)
+        public UserController(IUserService userService)
         {
-            this.repository = repository;
-            this.librariesRepository = librariesRepository;
             this.userService = userService;
-            this.mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public IActionResult GetAllUsers()
         {
-            var users = repository.GetAll();         
-
-            if (users.Count() == 0)
-                return NotFound();
-
-            return Ok(users);
+            return Ok(userService.GetAll());
         }
 
-        [HttpGet("GetUserById/{id}")]
+        [HttpGet("GetUserById/{id}"), AllowAnonymous]
         public IActionResult GetUserById(int id)
         {
-            var user = repository.GetUserById(id);
-            if (id == null)
-                return NotFound();
-
-            return Ok(user);
+            return Ok(userService.GetById(id));
         }
 
         [HttpGet("GetGameList")]
         public IActionResult GetGamesList()
         {
             int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
-            var games = repository.GetGames(_userId);
-
-            if (_userId == null)
-                return NotFound();
-
-            return Ok(games);
+            return Ok(userService.GetGames(_userId));
         }
 
         /// <remarks>
@@ -67,41 +47,14 @@ namespace GamesStore.Controllers
         [HttpPost, AllowAnonymous]
         public IActionResult AddNewUser(AddUserInputModel model)
         {
-            var user = mapper.Map<User>(model);
-
-            var emailExisits = repository.GetUsuarioByEmail(user.Email);
-            var nickNameExists = repository.GetUsuarioByNickName(user.GamerTag);
-            
-            if (emailExisits != null )
-                return BadRequest("Este usuario ja está cadastrado!");
-            if (nickNameExists != null)
-                return BadRequest("Este NickName ja existe!");
-
-            repository.AddUsuario(user);
-
-            var cart = new Cart(user.UserId);     
-            librariesRepository.CreateCart(cart);
-
-            var wishList = new WishList(user.UserId);
-            librariesRepository.CreateWishList(wishList);
-
-            var library = new Library(user.UserId);
-            librariesRepository.CreateLibrary(library);
-
-            return CreatedAtAction("User", new { userId = user.UserId }, user);
+            return Ok(userService.PostUser(model));
         }
 
         [HttpPut("UpdateUser/{id}")]
         public IActionResult UpdateUser(UpdateUserInputModel model)
         {
             int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
-            var user = repository.GetUserById(_userId);
-
-            if (user == null)
-                return NotFound();
-
-            user.Update(model.name, model.gamerTag, model.password);
-            repository.UpdateUsuario(user);
+            userService.PutUser(_userId, model);
 
             return NoContent();
         }
@@ -109,20 +62,14 @@ namespace GamesStore.Controllers
         [HttpDelete("DeleteUser")]
         public IActionResult DeleteUser()
         {
-
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
-            
-            var user = repository.GetUserById(_userId);
-            if (user == null)
-                return NotFound();
-
-            repository.DeleteUsuario(user);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier).ToString());
+            userService.DeleteUser(_userId);
 
             return NoContent();
         }
 
         [HttpPost("authenticate"), AllowAnonymous]
-        public IActionResult AddNewUser(UserAuthenticateRequestViewModel model)
+        public IActionResult AuthenticateUser(UserAuthenticateRequestViewModel model)
         {
             return Ok(userService.Authenticate(model));
         }

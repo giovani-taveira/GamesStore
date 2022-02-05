@@ -13,7 +13,7 @@ using GamesStore.Application._Service;
 using GamesStore.Application.Interface;
 using Microsoft.AspNet.Identity;
 using GamesStore.Entities;
-using Microsoft.Owin;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +38,12 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILibrariesRepository, LibrariesRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IWishListService, WishListService>();
+builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ISaleService, SaleService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

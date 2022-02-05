@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using GamesStore.Application.Interface;
+using GamesStore.Authentication.Services;
 using GamesStore.Data.Repositories;
 using GamesStore.Entities;
 using GamesStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GamesStore.Controllers
 {
@@ -10,57 +13,37 @@ namespace GamesStore.Controllers
     [Route("api/[controller]")]
     public class GameController : ControllerBase
     {
-        private readonly IGameRepository repository;
-        private readonly IMapper mapper;
+        private readonly IGameService gameService;
 
-        public GameController(IGameRepository repository, IMapper mapper)
+        public GameController(IGameService gameService)
         {
-            this.repository = repository;
-            this.mapper = mapper;
+            this.gameService = gameService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var games = repository.GetAll();
-
-            if(games.Count() == 0)
-                return NotFound();
-
-            return Ok(games);
+            return Ok(gameService.GetAll());
         }
 
-        [HttpGet("GetById/{id}")]
-        public IActionResult GetAll(int id)
+        [HttpGet("GetById")]
+        public IActionResult GetById()
         {
-            var games = repository.GetById(id);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
 
-            if (games == null)
-                return NotFound();
-
-            return Ok(games);
+            return Ok(gameService.GetById(_userId));
         }
 
         [HttpGet("GetByName/{name}")]
         public IActionResult GetByName(string name)
         {
-            var gameByName = repository.GetByName(name);
-
-            if (gameByName.Count() == 0)
-                return NotFound();
-
-            return Ok(gameByName);
+            return Ok(gameService.GetByName(name));
         }
 
         [HttpGet("GetByGender/{gender}")]
         public IActionResult GetByGender(string gender)
         {
-            var gameByGender = repository.GetByGender(gender);
-
-            if(gameByGender.Count() == 0)
-                return NotFound();
-
-            return Ok(gameByGender);
+            return Ok(gameService.GetByGender(gender));
         }
 
         /// <remarks>
@@ -69,73 +52,40 @@ namespace GamesStore.Controllers
         [HttpGet("GetByReleaseDate/{releaseDate}")]
         public IActionResult GetByReleaseDate(DateTime releaseDate)
         {
-            var gameByReleaseDate = repository.GetByReleaseDate(releaseDate);
-
-            if (gameByReleaseDate.Count() == 0)
-                return NotFound();
-
-            return Ok(gameByReleaseDate);
+            return Ok(gameService.GetByReleaseDate(releaseDate));
         }
 
         [HttpGet("GetByPrice/{price}")]
         public IActionResult GetByPrice(decimal price)
         {
-            var gameByPrice = repository.GetByPrice(price);
-
-            if (gameByPrice.Count() == 0)
-                return NotFound();
-
-            return Ok(gameByPrice);
+            return Ok(gameService.GetByPrice(price));
         }
-
 
         /// <remarks>
         /// ReleaseDate Format : dd/MM/yyyy
         /// </remarks>
-        [HttpPost("{userId}")]
-        public IActionResult AddNewGame(int userId, AddGameInputModel model)
+        [HttpPost]
+        public IActionResult AddNewGame(AddGameInputModel model)
         {
-            var nameExists = repository.GetByName(model.name);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
 
-            if (nameExists.Count() != 0)
-                return BadRequest("Ja existe um jogo com este nome!");
-
-            var game = mapper.Map<Games>(model);
-            game.UserId = userId;
-            repository.AddGame(game);
-
-            return CreatedAtAction("Game ID", new { GameId = game.GameId }, game);
+            return Ok(gameService.AddNewGame(_userId, model));
         }
 
-        [HttpPut("{gameId}/{userId}")]
-        public IActionResult UpdateGame(int gameId,int userId, UpdateGameInputModel model)
+        [HttpPut("{gameId}")]
+        public IActionResult UpdateGame(int gameId, UpdateGameInputModel model)
         {
-            var game = repository.GetById(gameId);
-
-            if (game.UserId != userId)
-                return NotFound("Este usuário não possui nenhum jogo com este ID");
-
-            if (game == null)
-                return NotFound();
-
-            game.Update(model.name, model.price, model.description, model.platform, model.publisher);
-            repository.UpdateGame(game);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            gameService.UpdateGame(gameId, _userId, model);
 
             return NoContent();
         }
 
-        [HttpDelete("{gameId}/{userId}")]
-        public IActionResult DeleteGame(int gameId, int userId)
+        [HttpDelete("{gameId}")]
+        public IActionResult DeleteGame(int gameId)
         {
-            var game = repository.GetById(gameId);
-
-            if (game.UserId != userId)
-                return NotFound("Este usuário não possui nenhum jogo com este ID");
-
-            if (game == null)
-                return NotFound();
-
-            repository.DeleteGame(game);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            gameService.DeleteGame(gameId, _userId);
 
             return NoContent();
         }

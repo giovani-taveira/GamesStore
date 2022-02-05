@@ -1,63 +1,46 @@
 ﻿using AutoMapper;
+using GamesStore.Application.Interface;
+using GamesStore.Authentication.Services;
 using GamesStore.Data.Repositories;
 using GamesStore.Entities;
 using GamesStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GamesStore.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("api/[controller]")]
     public class CartController : ControllerBase
     {
-        private readonly ILibrariesRepository repository;
-        private readonly IGameRepository gameRepository;
-        private readonly IUserRepository userRepository;
+        private readonly ICartService cartService;
 
-        public CartController(ILibrariesRepository repository, IGameRepository gameRepository, IUserRepository userRepository)
+        public CartController(ICartService cartService)
         {
-            this.repository = repository;
-            this.gameRepository = gameRepository;
-            this.userRepository = userRepository;
+            this.cartService = cartService;
         }
 
-        [HttpGet("{userId}")]
-        public IActionResult GetGamesFromCart(int userId)
+        [HttpGet(), AllowAnonymous]
+        public IActionResult GetGamesFromCart()
         {
-            if (userRepository.GetUserById(userId) == null)
-                return NotFound();
-
-            var cart = repository.GamesFromCart(userId);  
-            return Ok(cart);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(cartService.GetGames(_userId));
         }
 
-        [HttpPost("AddToCart/{userId}/{gameId}")]
-        public IActionResult AddGameOnCart(int userId, int gameId)
+        [HttpPost("{gameId}")]
+        public IActionResult AddGameOnCart(int gameId)
         {
-            var list = repository.GamesFromCart(userId);
-
-            foreach (var _game in list.Games)
-                if (_game.GameId == gameId)
-                    return BadRequest("Este jogo já está no carrinho");
-
-            var game = gameRepository.GetById(gameId);
-            if (game == null)
-                return NotFound("Jogo inexistente");
-
-            repository.AddGameToCart(userId, game);
-            return Ok(game);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(cartService.AddGame(_userId, gameId));
         }
 
-        [HttpDelete("RemoveFromCart/{userId}/{gameId}")]
-        public IActionResult RemoveGame(int userId, int gameId)
+        [HttpDelete("{gameId}")]
+        public IActionResult RemoveGame( int gameId)
         {
-            if (userRepository.GetUserById(userId) == null)
-                return NotFound("Usuário não encontrado");
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            cartService.RemoveGame(_userId, gameId);
 
-            if (gameRepository.GetById(gameId) == null)
-                return NotFound("Jogo não encontrado");
-
-            repository.RemoveGameFromCart(userId, gameId);
             return NoContent();
         }
     }

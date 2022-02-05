@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using GamesStore.Application.Interface;
+using GamesStore.Authentication.Services;
 using GamesStore.Data;
 using GamesStore.Data.Repositories;
 using GamesStore.Entities;
 using GamesStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GamesStore.Controllers
 {
@@ -11,65 +14,31 @@ namespace GamesStore.Controllers
     [Route("api/[controller]")]
     public class SaleController : ControllerBase
     {
-        private readonly ISaleRepository repository;
-        private readonly IGameRepository gameRepository;
-        private readonly IMapper mapper;
+        private readonly ISaleService saleService;
 
-        public SaleController(ISaleRepository repository, IGameRepository gameRepository, IMapper mapper)
+        public SaleController(ISaleService saleService)
         {
-            this.repository = repository;
-            this.gameRepository = gameRepository;
-            this.mapper = mapper;
+            this.saleService = saleService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var gamesOnSale = repository.GetAllGamesOnSale();
-
-            if (gamesOnSale.Count() == 0)
-                return NotFound("Não há nenhuma promoção no momento");
-
-            return Ok(gamesOnSale);
+            return Ok(saleService.GetAll());
         }
 
         [HttpPost("{gameId}")]
         public IActionResult AddNewSale(int gameId, AddSaleInputModel model)
         {
-            var sale = new Sale(gameId, model.promotionalPrice, model.days);
-
-            var TemPromocaoAtiva = repository.TemPromocaoAtiva(gameId);
-            var gameQuery = gameRepository.GetById(gameId);
-            if (TemPromocaoAtiva)
-                return BadRequest("Este jogo ja tem um promoção ativa");
-
-            if (model.promotionalPrice >= gameQuery.Price)
-                return BadRequest("O preço promocional não pode ser maior nem igual que o preço normal");
-
-            if (model.days > 30 || model.days < 7)
-                return BadRequest("A promoção não pode durar mais que 30 dias e menos que 7 dias");
-
-
-
-            gameQuery.ItIsInPromotion = true;
-            repository.AddNewSale(sale);
-
-            return CreatedAtAction("Promocao ID", new { id = sale.SaleId}, sale);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(saleService.AddNewSale(gameId, model));
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteSale(int id)
+        [HttpDelete("{saleId}")]
+        public IActionResult DeleteSale(int saleId)
         {
-            var sale = repository.GetSale(id);
-
-            if (sale == null)
-                return NotFound();
-
-            var promocao = repository.GetSale(id);
-            var gameQuery = gameRepository.GetById(promocao.GameId);
-            gameQuery.ItIsInPromotion = false;
-
-            repository.DeleteSale(id);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            saleService.DeleteSale(saleId);
             return NoContent();
         }
 
@@ -79,16 +48,7 @@ namespace GamesStore.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteSale()
         {
-            var promocoes = repository.GetAllGamesOnSale(); 
-            foreach (var promocao in promocoes)
-            {
-                if(DateTime.Now >= promocao.PromotionEndDate)
-                {
-                    var gameQuery = gameRepository.GetById(promocao.GameId);
-                    gameQuery.ItIsInPromotion = false;
-                    repository.DeleteSale(promocao);
-                }
-            }
+            saleService.DeleteSale();
             return NoContent();
         }
     }

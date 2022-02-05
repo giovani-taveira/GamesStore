@@ -1,60 +1,42 @@
-﻿using GamesStore.Data.Repositories;
+﻿using GamesStore.Application.Interface;
+using GamesStore.Authentication.Services;
+using GamesStore.Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GamesStore.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("api/[controller]")]
     public class WishListController : ControllerBase
     {
-        private readonly ILibrariesRepository repository;
-        private readonly IGameRepository gameRepository;
-        private readonly IUserRepository userRepository;
+        private readonly IWishListService wishListService;
 
-        public WishListController(ILibrariesRepository repository, IGameRepository gameRepository, IUserRepository userRepository)
+        public WishListController(IWishListService wishListService)
         {
-            this.repository = repository;
-            this.gameRepository = gameRepository;
-            this.userRepository = userRepository;
+            this.wishListService = wishListService;
         }
 
-        [HttpGet("{userId}")]
-        public IActionResult GetGamesFromWishList(int userId)
+        [HttpGet]
+        public IActionResult GetGamesFromWishList()
         {
-            if (userRepository.GetUserById(userId) == null)
-                return NotFound();
-
-            var cart = repository.GamesFromWishList(userId);
-            return Ok(cart);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(wishListService.GetGames(_userId));
         }
 
-        [HttpPost("AdicionarNaListaDeDesejos/{userId}/{gameId}")]
-        public IActionResult AddGameOnWishList(int userId, int gameId)
+        [HttpPost("{gameId}")]
+        public IActionResult AddGameOnWishList(int gameId)
         {
-            var list = repository.GamesFromCart(userId);
-
-            foreach (var _game in list.Games)
-                if (_game.GameId == gameId)
-                    return BadRequest("Este jogo já está no carrinho");
-
-            var game = gameRepository.GetById(gameId);
-            if (game == null)
-                return NotFound();
-
-            repository.AddGameToWishList(userId, game);
-            return Ok(game);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(wishListService.AddGame(_userId, gameId));
         }
 
-        [HttpDelete("RemoverDaListaDeDesejos/{userId}/{gameId}")]
-        public IActionResult RemoveGame(int userId, int gameId)
+        [HttpDelete("{gameId}")]
+        public IActionResult RemoveGame(int gameId)
         {
-            if (userRepository.GetUserById(userId) == null)
-                return NotFound("Usuário não encontrado");
-
-            if (gameRepository.GetById(gameId) == null)
-                return NotFound("Jogo não encontrado");
-
-            repository.RemoveGameFromWishList(userId, gameId);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            wishListService.RemoveGame(_userId, gameId);
             return NoContent();
         }
     }

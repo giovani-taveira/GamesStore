@@ -1,64 +1,35 @@
-﻿using GamesStore.Data.Repositories;
+﻿using GamesStore.Application.Interface;
+using GamesStore.Authentication.Services;
+using GamesStore.Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GamesStore.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize]
     [Route("api/[controller]")]
     public class LibraryController : ControllerBase
     {
-        private readonly ILibrariesRepository repository;
-        private readonly IGameRepository gameRepository;
-        private readonly IUserRepository userRepository;
+        private readonly ILibraryService libraryService;
 
-        public LibraryController(ILibrariesRepository repository, IGameRepository gameRepository, IUserRepository userRepository)
+        public LibraryController(ILibraryService libraryService)
         {
-            this.repository = repository;
-            this.gameRepository = gameRepository;
-            this.userRepository = userRepository;
+            this.libraryService = libraryService;
         }
 
-        [HttpGet("{userId}")]
-        public IActionResult GetGamesFromLibrary(int userId)
+        [HttpGet]
+        public IActionResult GetGamesFromLibrary()
         {
-            if (userRepository.GetUserById(userId) == null) 
-                return NotFound();
-
-            var cart = repository.GamesFromLibrary(userId);
-            return Ok(cart);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(libraryService.GetGames(_userId));
         }
 
-        [HttpPost("AddToLibrary/{userId}/{gameId}")]
-        public IActionResult AddGameOnLibrary(int userId, int gameId)
+        [HttpPost("{gameId}")]
+        public IActionResult AddGameOnLibrary(int gameId)
         {
-            if (userRepository.GetUserById(userId) == null)
-                return NotFound("Usuário não encontrado");
-
-            var list = repository.GamesFromLibrary(userId);
-
-            foreach(var _game in list.Games)
-                if (_game.GameId == gameId)
-                    return BadRequest("Este jogo já está no carrinho");
-
-            var game = gameRepository.GetById(gameId);
-            if (game == null)
-                return NotFound();
-
-            repository.AddGameToLibrary(userId, game);
-            return Ok(game);
+            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            return Ok(libraryService.AddGame(_userId, gameId));
         }
-
-        //[HttpDelete("RemoveFromLibrary/{gameId}")]
-        //public IActionResult RemoveGame(int userId, int gameId)
-        //{
-        //    if (userRepository.GetUserById(userId) == null)
-        //        return NotFound("Usuário não encontrado");
-
-        //    if (gameRepository.GetById(gameId) == null)
-        //        return NotFound("Jogo não encontrado");
-
-        //    repository.RemoveGameFromLibrary(userId, gameId);
-        //    return NoContent();
-        //}
     }
 }
