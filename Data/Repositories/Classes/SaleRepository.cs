@@ -17,7 +17,7 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public void DeleteSale(int id)
+        public void DeleteSale(Guid id)
         {
             var promocao = context.Sales.Single(c => c.SaleId == id);
             context.Sales.Remove(promocao);
@@ -34,12 +34,12 @@ namespace GamesStore.Data.Repositories
             return context.Sales.ToList();
         }
 
-        public Sale GetSale(int id)
+        public Sale GetSale(Guid id)
         {
             return context.Sales.SingleOrDefault(c => c.SaleId == id);
         }
 
-        public bool TemPromocaoAtiva(int gameId)
+        public bool TemPromocaoAtiva(Guid gameId)
         {
             var ctx = context.Sales.SingleOrDefault(c => c.GameId == gameId);
             if (ctx != null)

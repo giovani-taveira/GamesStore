@@ -9,7 +9,7 @@ namespace GamesStore.Application.Interface
 {
     public interface ILibraryService
     {
-        Library GetGames(int userId);
-        bool AddGame(int userId, int gameId);
+        Library GetGames(Guid userId);
+        bool AddGame(Guid userId, Guid gameId);
     }
 }

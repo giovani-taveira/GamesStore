@@ -9,8 +9,8 @@
             
         }
 
-        public int GameId { get; private set; }
-        public int UserId { get; set; }
+        public Guid GameId { get; private set; }
+        public Guid UserId { get; set; }
         public string Name { get; private set; }
         public DateTime ReleaseDate { get; private set; }
         public DateTime CreatedAt { get; private set; }

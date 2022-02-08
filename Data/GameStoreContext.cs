@@ -1,4 +1,5 @@
-﻿using GamesStore.Entities;
+﻿using GamesStore.Data.Validations;
+using GamesStore.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GamesStore.Data
@@ -15,6 +16,13 @@ namespace GamesStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Configurations
+            modelBuilder.ApplyConfiguration(new GameValidation());
+            modelBuilder.ApplyConfiguration(new ReviewValidation());
+            modelBuilder.ApplyConfiguration(new SaleValidations());
+            modelBuilder.ApplyConfiguration(new UserValidation());
+            #endregion
+
             #region Primary Keys
             modelBuilder.Entity<Games>()
                 .HasKey(e => e.GameId);
@@ -38,7 +46,6 @@ namespace GamesStore.Data
                 .HasKey(e => e.Id);
 
             #endregion
-
 
             #region Froreign Keys
             modelBuilder.Entity<Games>()
@@ -71,6 +78,7 @@ namespace GamesStore.Data
                 .HasForeignKey(e => e.UserId);
             #endregion
 
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Games> Games { get; set; }

@@ -21,7 +21,7 @@ namespace GamesStore.Application._Service
             this.gameRepository = gameRepository;
             this.userRepository = userRepository;
         }
-        public bool AddGame(int userId, int gameId)
+        public bool AddGame(Guid userId, Guid gameId)
         {
             var list = repository.GamesFromLibrary(userId);
 
@@ -38,7 +38,7 @@ namespace GamesStore.Application._Service
             return true;
         }
 
-        public Library GetGames(int userId)
+        public Library GetGames(Guid userId)
         {
             if (userRepository.GetUserById(userId) == null)
                 throw new Exception("Usuário não encontrado");

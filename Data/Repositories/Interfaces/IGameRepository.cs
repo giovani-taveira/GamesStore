@@ -5,7 +5,7 @@ namespace GamesStore.Data.Repositories
     public interface IGameRepository
     {
         IEnumerable<Games> GetAll();
-        Games GetById(int id);
+        Games GetById(Guid id);
         IEnumerable<Games> GetByName(string name);
         IEnumerable<Games> GetByGender(string gender);
         IEnumerable<Games> GetByReleaseDate(DateTime releaseDate);

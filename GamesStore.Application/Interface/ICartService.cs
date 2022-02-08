@@ -9,8 +9,8 @@ namespace GamesStore.Application.Interface
 {
     public interface ICartService
     {
-        Cart GetGames(int userId);
-        bool AddGame(int userId, int gameId);
-        bool RemoveGame(int userId, int gameId);
+        Cart GetGames(Guid userId);
+        bool AddGame(Guid userId, Guid gameId);
+        bool RemoveGame(Guid userId, Guid gameId);
     }
 }

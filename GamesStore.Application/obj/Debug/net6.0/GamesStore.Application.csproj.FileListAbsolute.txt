@@ -2,7 +2,9 @@ C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Application.dll
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\ref\GamesStore.Application.dll
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Application.pdb
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Authentication.dll
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Authentication.pdb
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Data.pdb
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug\net6.0\GamesStore.Application.csproj.AssemblyReference.cache
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug\net6.0\GamesStore.Application.GeneratedMSBuildEditorConfig.editorconfig
@@ -13,5 +15,3 @@ C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug\net6.0\GamesStore.Application.dll
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug\net6.0\ref\GamesStore.Application.dll
 C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\obj\Debug\net6.0\GamesStore.Application.pdb
-C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Authentication.dll
-C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\GamesStore.Application\bin\Debug\net6.0\GamesStore.Authentication.pdb

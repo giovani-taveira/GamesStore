@@ -23,7 +23,7 @@ namespace GamesStore.Application._Service
             this.userRepository = userRepository;
         }
 
-        public Review GetReview(int id)
+        public Review GetReview(Guid id)
         {
             var reviews = repository.GetReviews(id);
             if (reviews == null)
@@ -32,7 +32,7 @@ namespace GamesStore.Application._Service
             return reviews;
         }
 
-        public bool PostReview(int gameId, int userId, AddReviewInputModel model)
+        public bool PostReview(Guid gameId, Guid userId, AddReviewInputModel model)
         {
             var user = userRepository.GetUserById(userId);
             var game = gameRepository.GetById(gameId);
@@ -44,7 +44,7 @@ namespace GamesStore.Application._Service
             return true;
         }
 
-        public bool PutReview(int id, UpdateReviewInputModel model)
+        public bool PutReview(Guid id, UpdateReviewInputModel model)
         {
             var review = repository.GetReviews(id);
             review.UpdateReview(model.title, model.description);
@@ -53,7 +53,7 @@ namespace GamesStore.Application._Service
             return true;
         }
 
-        public bool DeleteReview(int id)
+        public bool DeleteReview(Guid id)
         {
             if (repository.GetReviews(id) == null)
                 throw new Exception("Nenhuma review encontrada!");

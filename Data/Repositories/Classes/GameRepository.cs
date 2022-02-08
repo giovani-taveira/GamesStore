@@ -56,7 +56,7 @@ namespace GamesStore.Data.Repositories
             return context.Games.Where(c => c.ReleaseDate == releaseDate).ToList();
         }
 
-        public Games GetById(int id)
+        public Games GetById(Guid id)
         {
             var review =  context.Games.Include(review => review.Reviews).SingleOrDefault(c => c.GameId == id);
 

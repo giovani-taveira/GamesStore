@@ -7,7 +7,7 @@
 
         }
 
-        public Review(int userId, int gameId, string gamerTag, int stars, string title, string description)
+        public Review(Guid userId, Guid gameId, string gamerTag, int stars, string title, string description)
         {
             UserId = userId;
             GameId = gameId;
@@ -17,9 +17,9 @@
             Description = description;
         }
 
-        public int Id { get; private set; }
-        public int UserId { get; private set; }
-        public int GameId { get; private set; }
+        public Guid Id { get; private set; }
+        public Guid UserId { get; private set; }
+        public Guid GameId { get; private set; }
         public string GamerTag { get; private set; }
         public int Stars { get; private set; }
         public string Title { get; private set; }

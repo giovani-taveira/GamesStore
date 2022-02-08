@@ -24,7 +24,7 @@ namespace GamesStore.Application._Service
             this.mapper = mapper;
         }
 
-        public bool AddNewSale(int gameId, AddSaleInputModel model)
+        public bool AddNewSale(Guid gameId, AddSaleInputModel model)
         {
             var sale = new Sale(gameId, model.promotionalPrice, model.days);
 
@@ -46,7 +46,7 @@ namespace GamesStore.Application._Service
             return true;
         }
 
-        public bool DeleteSale(int saleId)
+        public bool DeleteSale(Guid saleId)
         {
             var sale = repository.GetSale(saleId);
 

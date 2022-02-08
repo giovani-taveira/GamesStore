@@ -10,11 +10,12 @@ namespace GamesStore.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public int UserId { get;  private set; }
+        public Guid UserId { get;  private set; }
         public string Name { get; private set; }
         public string GamerTag { get; private set; }
+        [EmailAddress]
         public string Email { get; private set; }
-        public string Password { get; private set; }
+        public string Password { get; set; }
         public DateTime DateOfBirth { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public List<Games> Games { get; private set; }

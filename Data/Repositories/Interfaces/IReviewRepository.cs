@@ -4,7 +4,7 @@ namespace GamesStore.Data.Repositories
 {
     public interface IReviewRepository
     {
-        Review GetReviews(int id);
+        Review GetReviews(Guid id);
         void AddReview(Review review);
         void UpdateReview(Review review);
         void DeleteReview(Review review);

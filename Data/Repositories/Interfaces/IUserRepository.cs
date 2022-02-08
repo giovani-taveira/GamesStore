@@ -8,8 +8,8 @@ namespace GamesStore.Data.Repositories
         void DeleteUsuario(User usuario);
         void AddGames(Games game);
         IEnumerable<User> GetAll();
-        User GetUserById(int id);
-        IEnumerable<Games> GetGames(int id);
+        User GetUserById(Guid id);
+        IEnumerable<Games> GetGames(Guid id);
         User GetUsuarioByEmail(string email);
         User GetUsuarioByNickName(string gamerTag);
     }

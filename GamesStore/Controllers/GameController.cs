@@ -29,7 +29,7 @@ namespace GamesStore.Controllers
         [HttpGet("GetById")]
         public IActionResult GetById()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
 
             return Ok(gameService.GetById(_userId));
         }
@@ -67,24 +67,24 @@ namespace GamesStore.Controllers
         [HttpPost]
         public IActionResult AddNewGame(AddGameInputModel model)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
 
             return Ok(gameService.AddNewGame(_userId, model));
         }
 
         [HttpPut("{gameId}")]
-        public IActionResult UpdateGame(int gameId, UpdateGameInputModel model)
+        public IActionResult UpdateGame(Guid gameId, UpdateGameInputModel model)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             gameService.UpdateGame(gameId, _userId, model);
 
             return NoContent();
         }
 
         [HttpDelete("{gameId}")]
-        public IActionResult DeleteGame(int gameId)
+        public IActionResult DeleteGame(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             gameService.DeleteGame(gameId, _userId);
 
             return NoContent();

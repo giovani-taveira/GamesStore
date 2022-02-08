@@ -42,7 +42,7 @@ namespace GamesStore.Application._Service
             return gameByGender.ToList();
         }
 
-        public Games GetById(int id)
+        public Games GetById(Guid id)
         {
             var game = repository.GetById(id);
 
@@ -82,7 +82,7 @@ namespace GamesStore.Application._Service
             return gameByReleaseDate.ToList();
         }
 
-        public bool AddNewGame(int userId, AddGameInputModel model)
+        public bool AddNewGame(Guid userId, AddGameInputModel model)
         {
             var nameExists = repository.GetByName(model.name);
 
@@ -96,7 +96,7 @@ namespace GamesStore.Application._Service
             return true;
         }
 
-        public bool DeleteGame(int gameId, int userId)
+        public bool DeleteGame(Guid gameId, Guid userId)
         {
             var game = repository.GetById(gameId);
 
@@ -110,7 +110,7 @@ namespace GamesStore.Application._Service
 
             return true;
         }
-        public bool UpdateGame(int gameId, int userId, UpdateGameInputModel model)
+        public bool UpdateGame(Guid gameId, Guid userId, UpdateGameInputModel model)
         {
             var game = repository.GetById(gameId);
 

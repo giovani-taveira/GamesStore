@@ -11,8 +11,8 @@ namespace GamesStore.Application.Interface
     public interface ISaleService
     {
         List<Sale> GetAll();
-        bool AddNewSale(int gameId, AddSaleInputModel model);
-        bool DeleteSale(int saleId);
+        bool AddNewSale(Guid gameId, AddSaleInputModel model);
+        bool DeleteSale(Guid saleId);
         bool DeleteSale();
     }
 }

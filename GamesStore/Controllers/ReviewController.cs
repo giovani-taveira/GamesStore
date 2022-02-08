@@ -21,28 +21,28 @@ namespace GamesStore.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetReview(int id)
+        public IActionResult GetReview(Guid id)
         {
             return Ok(reviewService.GetReview(id));
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult PostReview(int gameId, AddReviewInputModel model)
+        public IActionResult PostReview(Guid gameId, AddReviewInputModel model)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             
             return Ok(reviewService.PostReview(gameId, _userId, model));
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutReview(int id, UpdateReviewInputModel model)
+        public IActionResult PutReview(Guid id, UpdateReviewInputModel model)
         {
             reviewService.PutReview(id, model);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteReview(int id)
+        public IActionResult DeleteReview(Guid id)
         {
             reviewService.DeleteReview(id);
             return NoContent();

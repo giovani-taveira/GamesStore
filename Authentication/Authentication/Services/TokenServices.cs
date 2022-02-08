@@ -20,6 +20,7 @@ namespace GamesStore.Authentication.Services
                 {
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Email, user.Email.ToLower()),
+                    new Claim(ClaimTypes.Authentication, user.Password),
                     new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),

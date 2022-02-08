@@ -6,20 +6,19 @@ namespace GamesStore.Data.Repositories
     {
         //Cart ---------------------------------------------------------
         void CreateCart(Cart cart);
-        Cart GamesFromCart(int id);
-        void AddGameToCart(int id, Games game);
-        void RemoveGameFromCart(int userId, int gameId);
+        Cart GamesFromCart(Guid id);
+        void AddGameToCart(Guid id, Games game);
+        void RemoveGameFromCart(Guid userId, Guid gameId);
 
         //WishList -----------------------------------------------------
         void CreateWishList(WishList wishList);
-        WishList GamesFromWishList(int id);
-        void AddGameToWishList(int id, Games game);
-        void RemoveGameFromWishList(int userId, int gameId);
+        WishList GamesFromWishList(Guid id);
+        void AddGameToWishList(Guid id, Games game);
+        void RemoveGameFromWishList(Guid userId, Guid gameId);
 
         //Library ------------------------------------------------------
         void CreateLibrary(Library library);
-        Library GamesFromLibrary(int id);
-        void AddGameToLibrary(int id, Games game);
-        //void RemoveGameFromLibrary(int userId, int gameId);
+        Library GamesFromLibrary(Guid id);
+        void AddGameToLibrary(Guid id, Games game);
     }
 }

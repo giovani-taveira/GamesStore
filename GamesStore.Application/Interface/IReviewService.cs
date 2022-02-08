@@ -10,9 +10,9 @@ namespace GamesStore.Application.Interface
 {
     public interface IReviewService
     {
-        Review GetReview(int gameId);
-        bool PostReview(int gameId, int userId, AddReviewInputModel model);
-        bool PutReview(int id, UpdateReviewInputModel model);
-        bool DeleteReview(int id);
+        Review GetReview(Guid gameId);
+        bool PostReview(Guid gameId, Guid userId, AddReviewInputModel model);
+        bool PutReview(Guid id, UpdateReviewInputModel model);
+        bool DeleteReview(Guid id);
     }
 }

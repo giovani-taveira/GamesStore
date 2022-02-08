@@ -21,21 +21,21 @@ namespace GamesStore.Controllers
         [HttpGet]
         public IActionResult GetGamesFromWishList()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(wishListService.GetGames(_userId));
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult AddGameOnWishList(int gameId)
+        public IActionResult AddGameOnWishList(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(wishListService.AddGame(_userId, gameId));
         }
 
         [HttpDelete("{gameId}")]
-        public IActionResult RemoveGame(int gameId)
+        public IActionResult RemoveGame(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             wishListService.RemoveGame(_userId, gameId);
             return NoContent();
         }

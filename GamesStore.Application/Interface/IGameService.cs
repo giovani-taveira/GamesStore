@@ -11,13 +11,13 @@ namespace GamesStore.Application.Interface
     public interface IGameService
     {
         List<Games> GetAll();
-        Games GetById(int id);
+        Games GetById(Guid id);
         List<Games> GetByName(string name);
         List<Games> GetByGender(string gender);
         List<Games> GetByReleaseDate(DateTime releaseDate);
         List<Games> GetByPrice(decimal price);
-        bool AddNewGame(int userId, AddGameInputModel model);
-        bool UpdateGame(int gameId, int userId, UpdateGameInputModel model);
-        bool DeleteGame(int gameId, int userId);
+        bool AddNewGame(Guid userId, AddGameInputModel model);
+        bool UpdateGame(Guid gameId, Guid userId, UpdateGameInputModel model);
+        bool DeleteGame(Guid gameId, Guid userId);
     }
 }

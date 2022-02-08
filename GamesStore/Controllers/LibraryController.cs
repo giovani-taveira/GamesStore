@@ -21,14 +21,14 @@ namespace GamesStore.Controllers
         [HttpGet]
         public IActionResult GetGamesFromLibrary()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(libraryService.GetGames(_userId));
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult AddGameOnLibrary(int gameId)
+        public IActionResult AddGameOnLibrary(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(libraryService.AddGame(_userId, gameId));
         }
     }

@@ -18,19 +18,19 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public Cart GamesFromCart(int id)
+        public Cart GamesFromCart(Guid id)
         {
             return context.Carts.Include(c => c.Games).SingleOrDefault(c => c.UserId == id);  
         }
 
-        public void AddGameToCart(int id, Games game)
+        public void AddGameToCart(Guid id, Games game)
         {
             var games = context.Carts.Single(c => c.UserId == id);
             games.Games.Add(game);
             context.SaveChanges();
         }
 
-        public void RemoveGameFromCart(int userId, int gameId)
+        public void RemoveGameFromCart(Guid userId, Guid gameId)
         {
             var user = context.Carts.Include(c => c.Games).SingleOrDefault(c => c.UserId == userId);
             var game = user.Games.SingleOrDefault(c => c.GameId == gameId);
@@ -46,19 +46,19 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public WishList GamesFromWishList(int id)
+        public WishList GamesFromWishList(Guid id)
         {
             return context.WishLists.Include(c => c.Games).SingleOrDefault(c => c.UserId == id);
         }
 
-        public void AddGameToWishList(int id, Games game)
+        public void AddGameToWishList(Guid id, Games game)
         {
             var games = context.WishLists.Single(c => c.UserId == id);
             games.Games.Add(game);
             context.SaveChanges();
         }
 
-        public void RemoveGameFromWishList(int userId, int gameId)
+        public void RemoveGameFromWishList(Guid userId, Guid gameId)
         {
             var user = context.WishLists.Include(c => c.Games).SingleOrDefault(c => c.UserId == userId);
             var game = user.Games.SingleOrDefault(c => c.GameId == gameId);
@@ -74,25 +74,17 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public Library GamesFromLibrary(int id)
+        public Library GamesFromLibrary(Guid id)
         {
             return context.Libraries.Include(c => c.Games).SingleOrDefault(c => c.UserId == id);
         }
 
-        public void AddGameToLibrary(int id, Games game)
+        public void AddGameToLibrary(Guid id, Games game)
         {
             var games = context.Libraries.Single(c => c.UserId == id);
             games.Games.Add(game);
             context.SaveChanges();
         }
-
-        //public void RemoveGameFromLibrary(int userId, int gameId)
-        //{
-        //    var user = context.Libraries.Include(c => c.Games).SingleOrDefault(c => c.UserId == userId);
-        //    var game = user.Games.SingleOrDefault(c => c.GameId == gameId);
-        //    user.Games.Remove(game);
-        //    context.SaveChanges();
-        //}
         #endregion
     }
 }

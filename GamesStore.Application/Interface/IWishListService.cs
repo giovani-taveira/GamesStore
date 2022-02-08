@@ -9,8 +9,8 @@ namespace GamesStore.Application.Interface
 {
     public interface IWishListService
     {
-        WishList GetGames(int userId);
-        bool AddGame(int userId, int gameId);
-        bool RemoveGame(int userId, int gameId);
+        WishList GetGames(Guid userId);
+        bool AddGame(Guid userId, Guid gameId);
+        bool RemoveGame(Guid userId, Guid gameId);
     }
 }

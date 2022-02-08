@@ -29,7 +29,7 @@ namespace GamesStore.Controllers
         }
 
         [HttpGet("GetUserById/{id}"), AllowAnonymous]
-        public IActionResult GetUserById(int id)
+        public IActionResult GetUserById(Guid id)
         {
             return Ok(userService.GetById(id));
         }
@@ -37,7 +37,7 @@ namespace GamesStore.Controllers
         [HttpGet("GetGameList")]
         public IActionResult GetGamesList()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(userService.GetGames(_userId));
         }
 
@@ -45,24 +45,24 @@ namespace GamesStore.Controllers
         /// DayOfBirth Format : dd/MM/yyyy,
         /// </remarks>
         [HttpPost, AllowAnonymous]
-        public IActionResult AddNewUser(AddUserInputModel model)
+        public async Task<IActionResult> AddNewUser(AddUserInputModel model)
         {
             return Ok(userService.PostUser(model));
         }
 
-        [HttpPut("UpdateUser/{id}")]
+        [HttpPut]
         public IActionResult UpdateUser(UpdateUserInputModel model)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             userService.PutUser(_userId, model);
 
             return NoContent();
         }
 
-        [HttpDelete("DeleteUser")]
+        [HttpDelete]
         public IActionResult DeleteUser()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier).ToString());
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier).ToString());
             userService.DeleteUser(_userId);
 
             return NoContent();

@@ -11,7 +11,7 @@ namespace GamesStore.Data.Repositories.Game
             this.context = context;
         }
 
-        public Review GetReviews(int id)
+        public Review GetReviews(Guid id)
         {
             return context.Reviews.SingleOrDefault(c => c.Id == id);
         }

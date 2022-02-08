@@ -28,16 +28,16 @@ namespace GamesStore.Controllers
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult AddNewSale(int gameId, AddSaleInputModel model)
+        public IActionResult AddNewSale(Guid gameId, AddSaleInputModel model)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(saleService.AddNewSale(gameId, model));
         }
 
         [HttpDelete("{saleId}")]
-        public IActionResult DeleteSale(int saleId)
+        public IActionResult DeleteSale(Guid saleId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             saleService.DeleteSale(saleId);
             return NoContent();
         }

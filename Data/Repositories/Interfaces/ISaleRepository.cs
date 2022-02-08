@@ -5,10 +5,10 @@ namespace GamesStore.Data.Repositories
     public interface ISaleRepository
     {
         IEnumerable<Sale> GetAllGamesOnSale();
-        Sale GetSale(int id);
+        Sale GetSale(Guid id);
         void AddNewSale(Sale sale);
-        void DeleteSale(int id);
+        void DeleteSale(Guid id);
         void DeleteSale(Sale sale);
-        bool TemPromocaoAtiva(int gameId);
+        bool TemPromocaoAtiva(Guid gameId);
     }
 }

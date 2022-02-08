@@ -24,21 +24,22 @@ namespace GamesStore.Controllers
         [HttpGet(), AllowAnonymous]
         public IActionResult GetGamesFromCart()
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(cartService.GetGames(_userId));
         }
 
         [HttpPost("{gameId}")]
-        public IActionResult AddGameOnCart(int gameId)
+        public IActionResult AddGameOnCart(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+           
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             return Ok(cartService.AddGame(_userId, gameId));
         }
 
         [HttpDelete("{gameId}")]
-        public IActionResult RemoveGame( int gameId)
+        public IActionResult RemoveGame(Guid gameId)
         {
-            int _userId = int.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
+            Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
             cartService.RemoveGame(_userId, gameId);
 
             return NoContent();

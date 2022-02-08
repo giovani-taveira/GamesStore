@@ -24,7 +24,7 @@ namespace GamesStore.Data.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<Games> GetGames(int id)
+        public IEnumerable<Games> GetGames(Guid id)
         {
             return context.Games.Where(g => g.UserId == id).ToList();
         }
@@ -34,7 +34,7 @@ namespace GamesStore.Data.Repositories
             return context.Users.ToList();
         } 
 
-        public User GetUserById(int id)
+        public User GetUserById(Guid id)
         {
             return context.Users.Include(c => c.Games).SingleOrDefault(u => u.UserId == id);
         }

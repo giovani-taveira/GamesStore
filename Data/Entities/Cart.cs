@@ -7,13 +7,13 @@
             Games = new List<Games>();
         }
 
-        public Cart(int userId)
+        public Cart(Guid userId)
         {
             UserId = userId;
         }
 
-        public int Id { get; private set; }
-        public int UserId { get; private set; }
+        public Guid Id { get; private set; }
+        public Guid UserId { get; private set; }
         public List<Games> Games  { get; private set; }
 
 

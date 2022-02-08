@@ -12,11 +12,12 @@ namespace GamesStore.Application.Interface
     public interface IUserService
     {
         List<User> GetAll();
-        User GetById(int id);
-        List<Games> GetGames(int id);
+        User GetById(Guid id);
+        List<Games> GetGames(Guid id);
         bool PostUser(AddUserInputModel model);
-        bool PutUser(int userId, UpdateUserInputModel model);
-        bool DeleteUser(int id);
+        bool PutUser(Guid userId, UpdateUserInputModel model);
+        bool DeleteUser(Guid id);
+        //bool SendEmailAsync(string email, string subject, string body);
         UserAuthenticateResponseViewModel Authenticate(UserAuthenticateRequestViewModel user);
     }
 }
