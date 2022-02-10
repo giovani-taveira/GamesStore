@@ -1,44 +1,72 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">GamesStore</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+
 </header>
+
+
+<body>
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+
+      <div class="col-2" id="green">
+        <div class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white" style="width: 210px;">
+          <a href="/" class=" align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> <svg class="" width="40" height="60"> </svg> <span class="fs-4">Games Store</span> </a>
+
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"> <a href="#" class="nav-link text-white" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Store</span> </a> </li>
+            <li> <a href="#" class="nav-link text-white"> <i class="fa fa-dashboard"></i><span class="ms-2">Biblioteca</span> </a> </li>
+            <li> <a href="#" class="nav-link text-white"> <i class="fa fa-first-order"></i><span class="ms-2">Lista de Desejos</span> </a> </li>
+            <li> <a href="#" class="nav-link text-white"> <i class="fa fa-cog"></i><span class="ms-2">Carrinho</span> </a> </li>
+            <!--<li> <a href="#" class="nav-link text-white"> <i class="fa fa-bookmark"></i><span class="ms-2">Configurações</span> </a> </li>-->
+          </ul>
+
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong> John W </strong> </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#">New project</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-10" style="padding-left: 50px;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 flex-shrink-0 p-3">
+          <div class="container">
+
+            <div class="form"> <i class="bi bi-basket3"></i> <input type="text" class="form-control form-input color-#9a9a9a" placeholder="Pesquisar"></div>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+                    aria-label="Toggle navigation"
+                    [attr.aria-expanded]="isExpanded"
+                    (click)="toggle()">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse text-white"
+                 [ngClass]="{ show: isExpanded }">
+              <ul class="navbar-nav flex-grow">
+                <li class="nav-item"
+                    [routerLinkActive]="['link-active']"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                  <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['link-active']">
+                  <a class="nav-link text-dark" [routerLink]="['/users']">Users</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+</body>

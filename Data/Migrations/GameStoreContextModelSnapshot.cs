@@ -67,6 +67,10 @@ namespace GamesStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<bool>("ItIsInPromotion")
                         .HasColumnType("bit");
 

@@ -3,6 +3,7 @@ using GamesStore.Application.Interface;
 using GamesStore.Data.Repositories;
 using GamesStore.Entities;
 using GamesStore.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace GamesStore.Application._Service
         }
 
         public List<Games> GetByGender(string gender)
-        {
+        {    
             var gameByGender = repository.GetByGender(gender);
 
             if (gameByGender.Count() == 0)

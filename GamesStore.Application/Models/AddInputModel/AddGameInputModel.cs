@@ -1,4 +1,6 @@
-﻿namespace GamesStore.Models
+﻿using Microsoft.AspNetCore.Http;
+
+namespace GamesStore.Models
 {
     public record class AddGameInputModel(
         string name,

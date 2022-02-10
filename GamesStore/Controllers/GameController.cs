@@ -6,6 +6,7 @@ using GamesStore.Entities;
 using GamesStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.IO;
 
 namespace GamesStore.Controllers
 {
@@ -64,7 +65,7 @@ namespace GamesStore.Controllers
         /// <remarks>
         /// ReleaseDate Format : dd/MM/yyyy
         /// </remarks>
-        [HttpPost]
+        [HttpPost("{img}")]
         public IActionResult AddNewGame(AddGameInputModel model)
         {
             Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));

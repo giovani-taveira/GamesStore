@@ -12,6 +12,7 @@
         public Guid GameId { get; private set; }
         public Guid UserId { get; set; }
         public string Name { get; private set; }
+        public byte[] Image { get; set; }
         public DateTime ReleaseDate { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public decimal Price { get; private set; }

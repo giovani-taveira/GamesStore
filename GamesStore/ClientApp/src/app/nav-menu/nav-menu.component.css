@@ -2,6 +2,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+
 }
 
 html {
@@ -13,6 +14,66 @@ html {
   }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+
+body {
+  background-color: #121212
 }
+
+.nav-link:hover {
+  background-color: #525252 !important
+}
+
+.nav-link:focus {
+  background-color: #525252 !important
+}
+
+.nav-link .fa {
+
+  transition: all 1s;
+}
+
+.nav-link:hover .fa {
+  transform: rotate(360deg);
+}
+
+.nav{
+    margin-top: 40px;
+}
+
+.nav-link {
+  align-items: center;
+  height: 50px;
+  width: 190px;
+  border-radius: 8px;
+  margin-top: 3px;
+}
+
+.navbar {
+  display: block;
+  text-align: center;
+}
+
+.d-flex{
+    position: relative;
+    display: block;   
+}
+
+.form-control {
+  height: 45px;
+  background-color: #202020;
+  border-radius: 25px;
+  border: none
+}
+
+.form-input:focus {
+  box-shadow: none;
+  border: none;
+  background-color: #2a2a2a;
+}
+
+
+
+
+
+
+
