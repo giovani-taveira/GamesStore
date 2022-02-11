@@ -8,6 +8,7 @@ a.navbar-brand {
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -20,19 +21,21 @@ body {
 }
 
 .nav-link:hover {
-  background-color: #525252 !important
+  color: #FFFFFF;
+  background-color: #202020 !important
 }
 
 .nav-link:focus {
-  background-color: #525252 !important
+  background-color: #202020 !important;
+  color: #FFFFFF;
 }
 
-.nav-link .fa {
-
+.nav-link .bi {
+  margin-right: 20px;
   transition: all 1s;
 }
 
-.nav-link:hover .fa {
+.nav-link:hover .bi {
   transform: rotate(360deg);
 }
 
@@ -41,11 +44,40 @@ body {
 }
 
 .nav-link {
-  align-items: center;
-  height: 50px;
-  width: 190px;
+  color: #9a9a9a;
+  height: 62px;
+  width: 200px;
   border-radius: 8px;
   margin-top: 3px;
+}
+
+.nav-games {
+  color: #9a9a9a;
+  padding: 40px;
+  text-decoration: none;
+}
+
+.nav-games:hover {
+  color: #FFFFFF;
+}
+
+
+.form {
+  position: relative
+}
+
+.form .bi-search {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #9ca3af
+}
+
+.form-input {
+  color: white;
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px
 }
 
 .navbar {

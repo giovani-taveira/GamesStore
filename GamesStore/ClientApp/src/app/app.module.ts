@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
-
 
 @NgModule({
   declarations: [
@@ -17,7 +15,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    SideBarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
