@@ -32,8 +32,9 @@
                 <a class="nav-games" [routerLink]="['/']">Descobrir</a>
               </li>
               <li class="nav-item" [routerLinkActive]="['link-active']">
-                <a class="nav-games" [routerLink]="['/users']">Navegar</a>
+                <a class="nav-games" [routerLink]="['/']">Navegar</a>
               </li>
+
             </ul>
             <button class="navbar-toggler"
                     type="button"
@@ -48,7 +49,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse "
                  [ngClass]="{ show: isExpanded }">
               <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong> John W </strong> </a>
+                <a href="#" class=" align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong> John W </strong> </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                   <li><a class="dropdown-item" href="#">New project</a></li>
                   <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -62,6 +63,7 @@
             </div>
           </div>
         </nav>
+        <app-game-card></app-game-card>
       </div>
 
     </div>

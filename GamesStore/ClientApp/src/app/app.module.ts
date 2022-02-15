@@ -7,14 +7,18 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { GameCardComponent } from './game-card/game-card.component';
+import { CardGameDataService } from './_services/cardGame.data-service';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserLoginDataService } from './_services/user-login';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    LoginComponent,
+    GameCardComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -22,10 +26,10 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      //{ path: 'counter', component: CounterComponent },
+      { path: 'games', component: GameCardComponent },
     ])
   ],
-  providers: [],
+  providers: [CardGameDataService, UserLoginComponent, UserLoginDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

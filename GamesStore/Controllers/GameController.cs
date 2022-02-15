@@ -11,7 +11,7 @@ using System.IO;
 namespace GamesStore.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/game")]
     public class GameController : ControllerBase
     {
         private readonly IGameService gameService;
@@ -21,7 +21,7 @@ namespace GamesStore.Controllers
             this.gameService = gameService;
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonimous]
         public IActionResult GetAll()
         {
             return Ok(gameService.GetAll());
@@ -65,7 +65,7 @@ namespace GamesStore.Controllers
         /// <remarks>
         /// ReleaseDate Format : dd/MM/yyyy
         /// </remarks>
-        [HttpPost("{img}")]
+        [HttpPost()]
         public IActionResult AddNewGame(AddGameInputModel model)
         {
             Guid _userId = Guid.Parse(TokenServices.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier));
@@ -90,5 +90,9 @@ namespace GamesStore.Controllers
 
             return NoContent();
         }
+    }
+
+    internal class AllowAnonimousAttribute : Attribute
+    {
     }
 }
