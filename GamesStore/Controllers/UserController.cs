@@ -45,7 +45,7 @@ namespace GamesStore.Controllers
         /// DayOfBirth Format : dd/MM/yyyy,
         /// </remarks>
         [HttpPost, AllowAnonymous]
-        public async Task<IActionResult> AddNewUser(AddUserInputModel model)
+        public IActionResult AddNewUser(AddUserInputModel model)
         {
             return Ok(userService.PostUser(model));
         }

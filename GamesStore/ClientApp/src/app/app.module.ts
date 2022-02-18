@@ -11,6 +11,7 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { CardGameDataService } from './_services/cardGame.data-service';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserLoginDataService } from './_services/user-login';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UserLoginDataService } from './_services/user-login';
     HomeComponent,
     GameCardComponent,
     UserLoginComponent,
+    RegisterUserComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,9 +29,12 @@ import { UserLoginDataService } from './_services/user-login';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'games', component: GameCardComponent },
+      { path: 'signup', component: RegisterUserComponent },
+      { path: 'login', component: UserLoginComponent },
+      { path: 'home', component: NavMenuComponent },
     ])
   ],
-  providers: [CardGameDataService, UserLoginComponent, UserLoginDataService],
+  providers: [CardGameDataService, UserLoginComponent, UserLoginDataService, RegisterUserComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

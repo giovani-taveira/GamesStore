@@ -1,0 +1,63 @@
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Crie a sua conta aqui</h2>
+
+              <form>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example1cg" >Seu Nome</label>
+                  <input type="text" autocomplete="off" id="form3Example1cg" class="form-control form-control-lg" [(ngModel)]="userSingUp.name" name="name"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg" >GamerTag</label>
+                  <input type="text" autocomplete="off" id="form3Example4cg" class="form-control form-control-lg" [(ngModel)]="userSingUp.gamerTag" name="gamerTag"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg" >Data de Nascimento</label>
+                  <input type="text" autocomplete="off" id="form3Example4cg" class="form-control form-control-lg" [(ngModel)]="userSingUp.dayOfByrth" name="dayOfByrth"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" >Seu Email</label>
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" [(ngModel)]="userSingUp.email" name="email"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg" >Senha</label>
+                  <input type="password" autocomplete="off" id="form3Example4cg" class="form-control form-control-lg" [(ngModel)]="userSingUp.password" name="password"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cdg">Confirme sua Senha</label>
+                  <input type="password" autocomplete="off" id="form3Example4cdg" class="form-control form-control-lg" />
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-5">
+
+                  <label class="form-check-label" for="form2Example3g">
+                    Concordo com todos os tópicos nos <a href="#!" id="text-link"><u>Termos de Serviços</u></a>
+                  </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="button" style="background-color: #1c94f5" class="btn btn-success btn-block btn-lg gradient-custom-4 " (click)="postUser()">Registrar-se</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0" style="color:white">Já possui uma conta? <a [routerLink]="['/login']" id="text-link" class="fw-bold "><u>Login aqui</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

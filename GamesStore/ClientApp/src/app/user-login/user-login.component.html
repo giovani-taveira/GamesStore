@@ -14,7 +14,7 @@
       <!-- Login Form -->
       <form class="form">
         <input type="text" id="login" class="fadeIn second" [(ngModel)]="userLogin.Email" name="login" placeholder="email">
-        <input type="text" id="password" class="fadeIn third" [(ngModel)]="userLogin.Password" name="login" placeholder="senha">
+        <input type="text" id="password" autocomplete="off" class="fadeIn third" [(ngModel)]="userLogin.Password" name="login" placeholder="senha">
         <a id="text" class="underlineHover" href="#">Esqueceu sua Senha?</a>
         <br />
         <input type="submit" class="fadeIn fourth" (click)="authenticate() " value="Entrar">
@@ -22,7 +22,7 @@
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <p class="text2"> É novo por aqui? Então <a class="underlineHover" href="#"> Cadastre-se</a> </p>
+        <p class="text2"> É novo por aqui? Então <a class="underlineHover" [routerLink]="['/signup']"> Cadastre-se</a> </p>
       </div>
     </div>
   </div>
