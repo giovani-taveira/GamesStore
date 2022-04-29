@@ -27,7 +27,7 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'store', component: HomeComponent, pathMatch: 'full' },
       { path: 'games', component: GameCardComponent },
       { path: 'signup', component: RegisterUserComponent },
       { path: 'login', component: UserLoginComponent },

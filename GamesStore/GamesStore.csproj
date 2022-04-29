@@ -42,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\app.routing.module.ts" />
     <None Remove="ClientApp\src\app\_services\cardGame.data-service.ts" />
     <None Remove="ClientApp\src\app\_services\user-login.ts" />
   </ItemGroup>
@@ -53,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\app.routing.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\cardGame.data-service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\user-login.ts" />
   </ItemGroup>

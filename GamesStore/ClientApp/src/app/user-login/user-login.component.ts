@@ -4,6 +4,9 @@ import { UserLoginDataService } from '../_services/user-login';
 
 @Component({
   selector: 'app-user-login',
+  template: `
+    <app-nav-menu [data]={{variavel}}></app-nav-menu>
+`,
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
@@ -11,6 +14,7 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private userLoginDataService: UserLoginDataService, private router: Router ) { }
 
+  variavel: string = "Hellio World!";
   users: any[] = [];
   userLogin: any = {};
   userLogged: any = {};
@@ -34,11 +38,12 @@ export class UserLoginComponent implements OnInit {
       console.log(data);
       if (data.user) {
         localStorage.setItem('user_logged', JSON.stringify(data));
+        this.userLogin = data;
         this.IsAuthenticate = true;
         this.get();
         this.getUserData();
 
-        console.log(this.userLogin);
+        console.log("ta aqui" + this.userLogin);
       } else {
         alert('User invalid.');
       }
@@ -46,8 +51,6 @@ export class UserLoginComponent implements OnInit {
       console.log(error);
       alert('User invalid');
     })
-
-
   }
 
   getUserData() {
@@ -55,7 +58,5 @@ export class UserLoginComponent implements OnInit {
     this.userLogged = JSON.parse(this.userLogged);
     this.IsAuthenticate = this.userLogged != null;
     console.log(this.userLogged);
-
-    return this.userLogged
   }
 }

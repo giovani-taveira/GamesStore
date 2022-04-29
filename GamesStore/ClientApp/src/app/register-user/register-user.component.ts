@@ -20,6 +20,13 @@ export class RegisterUserComponent implements OnInit {
     this.userLoginDataService.AddNewUser(this.userSingUp).subscribe((data: any) => {
       console.log(data);
 
+      if (data) {
+        alert('Cadastro realizado com sucesso!');
+      }
+      else {
+        alert('Ocorreu um erro ao realizar o cadastro');
+      }
+
     }, error => {
       console.log(error);
       alert(error);
