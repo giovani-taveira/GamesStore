@@ -1,0 +1,132 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+    height: 100%;
+
+  }
+}
+
+.col-10 {
+  background-color: #121212;
+}
+
+.col-2 {
+  background-color: #121212;
+}
+
+body {
+
+}
+
+container-fluid {
+  background-color: #121212;
+}
+
+
+
+.nav-link:hover {
+  color: #FFFFFF;
+  background-color: #202020 !important
+}
+
+.nav-link:focus {
+  background-color: #202020 !important;
+  color: #FFFFFF;
+}
+
+.nav-link .bi {
+  margin-right: 20px;
+  transition: all 1s;
+
+}
+
+.nav-link:hover .bi {
+  transform: rotate(360deg);
+
+}
+
+.nav {
+  margin-top: 40px;
+  background-color: #121212;
+}
+
+.nav-link {
+  color: #9a9a9a;
+  height: 62px;
+  width: 200px;
+  border-radius: 8px;
+  margin-top: 3px;
+}
+
+.nav-games {
+  color: #9a9a9a;
+  padding: 40px;
+  text-decoration: none;
+}
+
+.nav-games:hover {
+  color: #FFFFFF;
+}
+
+
+.form {
+  position: relative
+}
+
+.form .bi-search {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #9ca3af
+}
+
+.form-input {
+  color: white;
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px
+}
+
+.navbar {
+  background-color: #121212;
+  height: 100px;
+  position: sticky;
+  text-align: center;
+  top: 0px;
+  z-index: 999;
+}
+
+.d-flex {
+  position: fixed;
+}
+
+.form-control {
+  height: 45px;
+  background-color: #202020;
+  border-radius: 25px;
+  border: none
+}
+
+.form-input:focus {
+  box-shadow: none;
+  border: none;
+  background-color: #2a2a2a;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+.container{
+  max-width: 70%;
+  position: fixed;
+  right:10px;
+}
+
+
+.card {
+  font-size: 14px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #121212;
+  border: none;
+  color: #FFFFFF;
+}
+
+.card-img-top {
+  border-radius: 10px;
+  min-width:120px;
+  min-height:210px;
+  background-color: #2a2a2a;
+}
+
+.card-text {
+  margin: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  overflow: hidden;
+
+}

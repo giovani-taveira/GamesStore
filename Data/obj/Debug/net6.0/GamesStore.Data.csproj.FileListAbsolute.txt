@@ -1,0 +1,14 @@
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\bin\Debug\net6.0\GamesStore.Data.deps.json
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\bin\Debug\net6.0\GamesStore.Data.runtimeconfig.json
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\bin\Debug\net6.0\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\bin\Debug\net6.0\ref\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\bin\Debug\net6.0\GamesStore.Data.pdb
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.csproj.AssemblyReference.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.AssemblyInfoInputs.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.AssemblyInfo.cs
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.csproj.CoreCompileInputs.cache
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\ref\GamesStore.Data.dll
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.pdb
+C:\MeusArquivos\Projetos\LojaDeGames\GamesStore\Data\obj\Debug\net6.0\GamesStore.Data.genruntimeconfig.cache

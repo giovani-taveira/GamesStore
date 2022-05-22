@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesStore", "GamesStore\GamesStore.csproj", "{BCE4F6B8-BA8B-491E-996D-6C58791CF825}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Web", "1-Web", "{942352F3-9F33-4EA7-89DB-DAA694D5C5F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{D93DFAFC-1A1F-462B-BE00-85DE52DDC1AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infra", "3-Infra", "{52A97219-5872-40D7-A6FA-84681B743AC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesStore.Data", "Data\GamesStore.Data.csproj", "{082931DB-FEC4-451E-80C5-59ABF094122E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Data", "1-Data", "{2DB8AA8C-7147-4ED8-BD67-A093D2EE9978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Authentication", "2-Authentication", "{67F79C67-67B7-478D-874E-577BDAA1CFDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesStore.Authentication", "Authentication\GamesStore.Authentication.csproj", "{86E49014-9586-4FFA-8F60-643CC81A85A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesStore.Application", "GamesStore.Application\GamesStore.Application.csproj", "{69913221-C730-48C3-B922-E792483B2A3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCE4F6B8-BA8B-491E-996D-6C58791CF825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE4F6B8-BA8B-491E-996D-6C58791CF825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE4F6B8-BA8B-491E-996D-6C58791CF825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE4F6B8-BA8B-491E-996D-6C58791CF825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{082931DB-FEC4-451E-80C5-59ABF094122E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{082931DB-FEC4-451E-80C5-59ABF094122E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{082931DB-FEC4-451E-80C5-59ABF094122E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{082931DB-FEC4-451E-80C5-59ABF094122E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E49014-9586-4FFA-8F60-643CC81A85A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E49014-9586-4FFA-8F60-643CC81A85A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E49014-9586-4FFA-8F60-643CC81A85A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E49014-9586-4FFA-8F60-643CC81A85A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69913221-C730-48C3-B922-E792483B2A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69913221-C730-48C3-B922-E792483B2A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69913221-C730-48C3-B922-E792483B2A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69913221-C730-48C3-B922-E792483B2A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCE4F6B8-BA8B-491E-996D-6C58791CF825} = {942352F3-9F33-4EA7-89DB-DAA694D5C5F5}
+		{082931DB-FEC4-451E-80C5-59ABF094122E} = {2DB8AA8C-7147-4ED8-BD67-A093D2EE9978}
+		{2DB8AA8C-7147-4ED8-BD67-A093D2EE9978} = {52A97219-5872-40D7-A6FA-84681B743AC4}
+		{67F79C67-67B7-478D-874E-577BDAA1CFDA} = {52A97219-5872-40D7-A6FA-84681B743AC4}
+		{86E49014-9586-4FFA-8F60-643CC81A85A0} = {67F79C67-67B7-478D-874E-577BDAA1CFDA}
+		{69913221-C730-48C3-B922-E792483B2A3B} = {D93DFAFC-1A1F-462B-BE00-85DE52DDC1AE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB0F2692-8571-43FE-8DC1-CC84F4D84579}
+	EndGlobalSection
+EndGlobal
