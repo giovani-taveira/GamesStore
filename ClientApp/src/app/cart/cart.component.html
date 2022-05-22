@@ -1,0 +1,18 @@
+
+<body>
+  <div class="container" id="teste">
+    <p class="title">Meu Carrinho</p>
+    <div class="row">
+      <div class="col-md-15 col-sm-2" *ngFor="let game of games">
+        <div class="card ">
+          <img class="card-img-top" src="https://image.api.playstation.com/vulcan/img/cfn/11307-dNapclgq_VqNtQ98Xp_LxovvAdjd5AknZhd_-k2Cckq9FPtKDXAHk-ODCfvDKChH6hkEO0VLtj7Vk4E-Z8G707oe0N.png" alt="Card image cap" onclick="description()">
+          <div class="card-body">
+            <p class="card-text">{{game.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+

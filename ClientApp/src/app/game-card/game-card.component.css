@@ -1,0 +1,46 @@
+.container {
+  margin-left: 22.3%;
+  display: block;
+  background-color: #121212;
+  width: 97.7%;
+  display: block;
+  position:absolute;
+  top: 13vh;
+  height: 87vh;
+}
+
+
+
+.card {
+  font-size: 14px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #121212;
+  border: none;
+  color: #FFFFFF;
+
+}
+
+.card:hover {
+  cursor: pointer;
+
+}
+
+.card-img-top {
+  border-radius: 10px;
+  min-width:120px;
+  min-height:210px;
+  background-color: #2a2a2a;
+}
+
+.card-img-top:hover{
+  opacity: 75%;
+}
+
+.card-text {
+  margin: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  overflow: hidden;
+}
